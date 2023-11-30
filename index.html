@@ -9,7 +9,14 @@
 
 <body>
 
-    
+<header>
+    <div>
+        <h1 onclick="scrollToSection('top-section')">mckinleydev</h1>
+        <h2 onclick="scrollToSection('project-section')">Projects</h2>
+        <h2 onclick="scrollToSection('aboutme-section')">About me</h2>
+    </div>
+</header>
+
 <div class="art-page">
     
     <pre id="ascii-art" class="art">
@@ -24,8 +31,13 @@ Check out my projects down below
     </pre>
 
 </div>
-<div class="empty-space"></div>
 
+
+<section id="top-section">
+<div class="empty-space"></div>
+</section>
+
+<section id="project-section">
 <div class="project-page">
     <div class="project">
         <div class="upper">
@@ -91,7 +103,9 @@ Check out my projects down below
         </div>
     </div>
 </div>
+</section>
 
+<section id="aboutme-section">
 <div class="aboutme">
     <div class="description">
         <h1>About Me</h1>
@@ -108,9 +122,10 @@ Check out my projects down below
         <p>Spotify: aetherscape</p>
     </div>
 </div>
+</section>
 
 
-
+<script src="index.js"></script>
 <script src="cube.js"></script>
 <script src="projects-gravitation.js"></script>
 <script src="projects-3Drendering.js"></script>

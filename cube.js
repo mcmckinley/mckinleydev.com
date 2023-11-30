@@ -26,7 +26,7 @@
           hSpaces+=10;
         }
         
-        var vSpaces = Math.floor(window.innerHeight/13)-4;
+        var vSpaces = Math.floor(window.innerHeight/13);
         if (window.innerHeight < 600){
           vSpaces = Math.floor(window.innerHeight/13)
         }

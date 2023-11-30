@@ -26,7 +26,7 @@
           hSpaces+=10;
         }
         
-        var vSpaces = Math.floor(window.innerHeight/13)-1;
+        var vSpaces = Math.floor(window.innerHeight/13)-4;
         if (window.innerHeight < 600){
           vSpaces = Math.floor(window.innerHeight/13)
         }
@@ -43,9 +43,9 @@
           side = window.innerWidth/200;
         }
         
-        r[0]+=0.003;
-        r[1]+=0.005;
-        r[2]+=0.003;
+        r[0]+=0.005;
+        r[1]+=0.002;
+        r[2]+=0.006;
 
         renderCube(r);
 

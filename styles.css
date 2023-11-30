@@ -151,13 +151,13 @@ header {
 
 .info h2 {
     font-size: clamp(12px, 5vw, 30px);
+    padding-left: 8px;
 }
 .info p {
     font-size: clamp(3px, 4vw, 20px);
 }
 .project-description h2, p {
     padding-left: 10px;
-
 }
 .project-description h3 {
     padding-top: auto;
@@ -221,7 +221,7 @@ header {
 }
 
 .description p {
-    font-size: clamp(3px, 4vw, 16px);
+    font-size: clamp(3px, 3vw, 20px);
     padding: 5px 10px;
     margin: 5px 0;
     

@@ -1,0 +1,241 @@
+
+
+html, body {
+    width: 100%;
+    height: 500vh;
+    min-height: 3450px;
+    margin: 0;
+    background-color: #000;
+}
+
+header {
+    position: fixed;
+    color: #fff;
+    display: flex;
+    gap: 20px;
+}
+
+.artbox {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace
+}
+.art {
+    background-color:#000; 
+
+    color:#aaa; 
+    font-size: 12px;
+    width: 100%;
+    max-height: 100%;
+
+    margin-top: 0px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.overlay {
+    color: white;
+    background-color: black;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* PROJECTS */
+
+
+.project-page {
+    width: 100%;
+    height: 60%;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+} 
+.project {
+    width: 75vh;
+    height: 75vh;
+    min-height: 600px;
+    
+    /*min-width: */
+    /* TRY COMMENTING EVERYTHING OUT FROM HERE> LOOK BASDASS*/
+    margin: 5vh;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.upper{
+    width: 100%;
+    height: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.project-description{
+    width: 100%;
+    height: 50%;
+    background-color: #333;
+}
+
+.project-description a {
+    color: white;
+}
+.project-description a:visited {
+    color: white;
+}
+.project-description a:hover {
+    color: #666;
+}
+.project-description a:active {
+    color: #611;
+}
+
+.info {
+    width: 50%;
+    min-width: 100px;
+    height: 100%;
+    background-color: #444;
+    font-weight: bold;
+    /*padding-left: 10px;
+    */
+}
+
+
+.minidisplay {
+    width: 50%;
+    min-width: 300px;
+    min-height: 300px;
+    position: relative;
+}
+.rendering-display,
+.gravity-display{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    line-height: 0.6em;
+}
+
+
+
+.sudoku-display {
+    position: absolute;
+    top: 0;
+    left: 0;
+    flex: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.3em;
+    letter-spacing: 0.73em;;
+    font-size: 20px;
+    font-weight: bold;
+}
+.unsolved {
+    color: black;
+}
+
+.info h2 {
+    font-size: clamp(12px, 5vw, 30px);
+}
+.info p {
+    font-size: clamp(3px, 4vw, 20px);
+}
+.project-description h2, p {
+    padding-left: 10px;
+
+}
+.project-description h3 {
+    padding-top: auto;
+    text-align: center;
+    color: #aaa;
+    
+}
+
+
+
+@media (max-width: 499px){
+    .info{
+        display: none;
+    } 
+    .description-header {
+        display: none;
+    }
+    .art {
+        font-size: 10px;
+    }
+}
+@media (min-width: 500px){
+    .project-title-mobile {
+        display: none;
+    }
+    .project-information-mobile {
+        display: none;
+    }
+    .date-created-mobile {
+        display: none;
+    }
+}
+
+
+
+/* ABOUT ME PAGE */
+
+
+.aboutme {
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+}
+.description {
+    width: 48%;
+    height: 90%;
+    background-color: #444;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.description h1 {
+    font-size: 30px;
+    padding: 5px 10px;;
+}
+
+.description p {
+    font-size: clamp(3px, 3vw, 16px);
+    padding: 5px 10px;
+    margin: 5px 0;
+    
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    
+    text-overflow: ellipses;
+}
+
+.personalimage{
+    width: 48%;
+    height: 90%;
+    background-color: #333;
+    border-radius: 3px;
+}
+

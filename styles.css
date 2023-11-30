@@ -221,7 +221,7 @@ header {
 }
 
 .description p {
-    font-size: clamp(3px, 3vw, 16px);
+    font-size: clamp(3px, 4vw, 16px);
     padding: 5px 10px;
     margin: 5px 0;
     
@@ -232,10 +232,20 @@ header {
     text-overflow: ellipses;
 }
 
-.personalimage{
+.socials {
     width: 48%;
     height: 90%;
     background-color: #333;
     border-radius: 3px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
+
+.social {
+    display: flex;
+    flex-direction: row;
+}
+
 

@@ -1,5 +1,6 @@
-// TODO. FIND OUT WHY LIGHT AND DEPTH ARE BEHAVING ODDLY/
-// RESTRUCTURE POS ON SCREEN.
+// Obfuscated for efficiency. Refer to the following instead.
+
+//https://github.com/mcmckinley/SudokuSolver/blob/main/sudoku.js
 
 (function() {
   
@@ -14,12 +15,6 @@
       var r = [0, 0, 0];
       var asciiframe=function() {
         var b=[];
-
-
-        // reset the background
-        //for(var k=0;k<10800;k++) {
-        //  b[k] = k%200 == 199 ? "\n" : '`';
-        //}
 
         var hSpaces = Math.floor(window.innerWidth/7);
         if (window.innerWidth < 500){

@@ -1,26 +1,34 @@
-(function() {
-    var _onload = function() {
+// Obfuscated for efficiency. Refer to the following instead.
 
-      var pretag = document.getElementById("3drendering-display");
-      // toggle button
-      var A=0;
-      var B=0;
-      var C=0;
+// https://github.com/mcmckinley/SudokuSolver/blob/main/sudoku.js
+
+(function() {
+  var _onload = function() {
+
+    var pretag = document.getElementById("3drendering-display");
+
+    // Rotation in each direction
+    var A=0;
+    var B=0;
+    var C=0;
 
       var asciiframe=function() {
+        // The array that is displayed to the box
         var b=[];
+        // Depth of each index of the array
         var zBuffer=[];
-        // reset the background
+        // Reset the background
         for(var k=0;k<1444;k++) {
           b[k] = k%38 == 37 ? "\n" : ' ';
           zBuffer[k] = 0;
         }
+
+        // Rotate the cube
         A+=0.04;
         B+=0.05;
         C+=0.01;
         renderCube([A, B, C]);
 
-        
         function renderCube(r){
           var normals = [
             [0, 1, 0],
@@ -29,11 +37,13 @@
             [-1, 0, 0],
             [0, 0, 1],
             [0, 0, -1]
-        ]
+          ]
+          // Rotate the normals before passing them
           for (var i=0; i<6; i++){
             normals[i] = rotate(normals[i], r)
           }
-          // lets make the corners cleaner
+
+
           for (var i=-4; i<4;i+=0.2){
             for (var j=-4; j<4;j+=0.2){
               var points = [
@@ -45,13 +55,17 @@
                 [i, j, -4]
             ]            
               for (const direction in points){
-                renderPoint(rotate(points[direction], r), normals[direction]);
+                renderPoint(
+                  rotate(points[direction], r), // The rotates point
+                  normals[direction] // Its corresponding normal vector
+                );
               }
             }
           }
         }
 
         function renderPoint(point, normal){
+          // Points on screen
           const screenx = 0|3*(point[0]*(49)/(50-point[2]))+19;
           const screeny = 0|19-3*(point[1]*(49)/(50-point[2]));
           

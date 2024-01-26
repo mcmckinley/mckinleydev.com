@@ -89,12 +89,12 @@ function clearDisplay(display, array){
     display.innerHTML = array.join("");
 }
 
-clearDisplay(gravDisplay, gravText);
-var interval = setInterval(updateGravDisplay, 100);
-
 function distanceBetween(A, B){
     //console.log(A.x , B.x, A.y, B.y)
     if (!A.z){
         return Math.sqrt((A.x-B.x)**2 + (A.y-B.y)**2);
     }
 }
+
+clearDisplay(gravDisplay, gravText);
+var interval = setInterval(updateGravDisplay, 100);

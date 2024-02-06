@@ -55,8 +55,16 @@ function quiz(responses) {
 }
 
 quiz(generateRandomResponses());
+for (var i = 0; i < 10; i++) {
+  feedbackBoxes[i].innerHTML = " ";
+  userEntryBoxes[i].innerHTML = " ";
+}
 
 setInterval(function () {
+  for (var i = 0; i < 10; i++) {
+    feedbackBoxes[i].innerHTML = " ";
+    userEntryBoxes[i].innerHTML = " ";
+  }
   const responses = generateRandomResponses();
   quiz(responses);
 }, 10000);

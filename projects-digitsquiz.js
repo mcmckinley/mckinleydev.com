@@ -1,82 +1,110 @@
 // easy sudoku
-const digitsDisplay = document.getElementById("digits-display");
+var feedbackBoxes = [];
+var userEntryBoxes = [];
+for (var i = 0; i < 10; i++) {
+  feedbackBoxes.push(document.getElementById("feedback" + i));
+  userEntryBoxes.push(document.getElementById("user-entry" + i));
+}
 
 //digitsDisplay.innerHTML = sudokuToString(unsolvedSudoku);
 
 var entries = [];
 
+function quiz(responses) {
+  // enter responses
+  var responseIndex = 4;
+  var enterResponse = setInterval(function () {
 
-function updateDisplay(responses) {
-    //digitsDisplay.innerHTML= responses[0].join("");
-    initiate();
+    // enter digits
+    var digitIndex = 0;
 
-    //1. solve the sudoku
-    var solve = setInterval(function () {
-      turn();
-      //digitsDisplay.innerHTML = digitsToString();
-      if (solved) {
-        clearInterval(solve);
+    var enterDigit = setInterval(function () {
+      digitIndex++;
+
+      // update the text boxes
+      for (var i = 0; i < digitIndex; i++) {
+        userEntryBoxes[i].innerHTML = responses[responseIndex][i];
       }
-    }, 100);
+
+      // stop entering digits once all 10 are n
+      if (digitIndex == 10) {
+        clearInterval(enterDigit);
+
+        // clear the entry boxes
+        for (var i = 0; i < 10; i++) {
+          userEntryBoxes[i].innerHTML = " ";
+        }
+
+        // update the feedback boxes
+        for (var i = 0; i < 10; i++) {
+          feedbackBoxes[i].innerHTML = responses[responseIndex][i];
+          if (responses[responseIndex][i] == responses[0][i]) {
+            feedbackBoxes[i].style.color = "green";
+          } else {
+            feedbackBoxes[i].style.color = "red";
+          }
+        }
+      }
+    }, 150);
+
+    responseIndex--;
+    if (responseIndex == 0) {
+      clearInterval(enterResponse);
+    }
+  }, 1600);
 }
 
-setInterval(function(){
+quiz(generateRandomResponses());
+
+setInterval(function () {
   const responses = generateRandomResponses();
-  updateDisplay(responses);
-}, 6500)
+  quiz(responses);
+}, 10000);
 
-function initiate(){
-    
-}
+function initiate() {}
 
-function turn() {
-  
-}
+function turn() {}
 
-function createEntryArray(){
+function createEntryArray() {
   var digits = generateRandomResponses();
 
-  console.log(digits);
 }
 
 // Creates a list of responses, starting with the correct one
 // and progressively getting more and more incorrect
-function generateRandomResponses(){
+function generateRandomResponses() {
   // Create a list of 5 random numbers 0-9, that don't repeat.
-  var nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+  var nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
   var wrongIndices = [];
-  for (var i=0; i<5; i++){
-    const index = Math.floor((9-i)*Math.random(0, 9-i)); 
+  for (var i = 0; i < 5; i++) {
+    const index = Math.floor((9 - i) * Math.random(0, 9 - i));
     wrongIndices.push(nums[index]);
-    nums.splice(index, 1)
+    nums.splice(index, 1);
   }
 
   // Randomly create the correct answer.
   var correctAns = [];
-  for (var i=0; i<10; i++){
+  for (var i = 0; i < 10; i++) {
     correctAns.push(randomDigit());
   }
-  
+
   // Add the correct answer to the responses array.
   responses = [correctAns];
 
-  
   // Add responses that progressively get more incorrect
-  for (var i=0; i<5; i++){
+  for (var i = 0; i < 5; i++) {
     // The new wrong answer starts out as the previous one..
     wrongAnswer = responses[i].slice();
     // and then one digit is randomly changed
     wrongAnswer[wrongIndices[i]] = randomDigit();
-    responses.push(wrongAnswer)
+    responses.push(wrongAnswer);
   }
-  
+
   return responses;
 }
 
-
-
-function randomDigit(){
-  return Math.floor(9*Math.random(0, 9)).toString();
+function randomDigit() {
+  return Math.floor(9 * Math.random(0, 9)).toString();
 }
 
 createEntryArray();

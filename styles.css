@@ -257,10 +257,14 @@ header div h1, h2 {
     font-weight: bold;
 }
 .feedback {
-    display: flex    
+    display: flex;
+    font-size: 20px;
+    font-weight: bold;
 }
 .user-entry {
-    display: flex    
+    display: flex ;
+    font-size: 20px;
+    font-weight: bold;   
 }
 
 

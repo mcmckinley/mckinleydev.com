@@ -245,6 +245,24 @@ header div h1, h2 {
     
 }
 
+.digits-display {
+    
+    width: 100%;
+    height: 50%;
+    margin: 0;
+    padding: 10px;
+    line-height: 1.3em;
+    letter-spacing: 0.73em;;
+    font-size: 20px;
+    font-weight: bold;
+}
+.feedback {
+    display: flex    
+}
+.user-entry {
+    display: flex    
+}
+
 
 
 @media (max-width: 499px){

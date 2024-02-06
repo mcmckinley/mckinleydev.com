@@ -3,10 +3,7 @@
 //https://github.com/mcmckinley/SudokuSolver/blob/main/sudoku.js
 
 (function() {
-  
-
     var _onload = function() {
-
       var pretag = document.getElementById("ascii-art");
 
       // toggle button
@@ -97,7 +94,6 @@
       asciiframe();
     }
 
-    
     if(document.all)
       window.attachEvent('onload',_onload);
     else

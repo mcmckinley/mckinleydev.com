@@ -1,4 +1,18 @@
-// easy sudoku
+// digits.js
+
+// Animates the main screen visible at mckinleydev.digits.com
+
+// Interval variables keep the IDs of the timers that constantly run.
+// These are used to cancel the timers when the page is hidden.
+var quizInterval = undefined;
+var responseInterval = undefined;
+var digitInterval = undefined;
+
+// Milliseconds between each digit entry and response
+const typeSpeed = 100; 
+const timeBetweenResponses = 200; 
+
+ // HTML text elements
 var feedbackBoxes = [];
 var userEntryBoxes = [];
 for (var i = 0; i < 10; i++) {
@@ -6,78 +20,87 @@ for (var i = 0; i < 10; i++) {
   userEntryBoxes.push(document.getElementById("user-entry" + i));
 }
 
-//digitsDisplay.innerHTML = sudokuToString(unsolvedSudoku);
-
-var entries = [];
-
-function quiz(responses) {
-  // enter responses
-  var responseIndex = 4;
-  var enterResponse = setInterval(function () {
-
-    // enter digits
-    var digitIndex = 0;
-
-    var enterDigit = setInterval(function () {
-      digitIndex++;
-
-      // update the text boxes
-      for (var i = 0; i < digitIndex; i++) {
-        userEntryBoxes[i].innerHTML = responses[responseIndex][i];
-      }
-
-      // stop entering digits once all 10 are n
-      if (digitIndex == 10) {
-        clearInterval(enterDigit);
-
-        // clear the entry boxes
-        for (var i = 0; i < 10; i++) {
-          userEntryBoxes[i].innerHTML = "_";
-
-        }
-
-        // update the feedback boxes
-        for (var i = 0; i < 10; i++) {
-          feedbackBoxes[i].innerHTML = responses[responseIndex][i];
-          if (responses[responseIndex][i] == responses[0][i]) {
-            feedbackBoxes[i].style.color = "rgb(5, 74, 4)";
-          } else {
-            feedbackBoxes[i].style.color = "rgb(117, 1, 1)";
-          }
-        }
-      }
-    }, 150);
-
-    responseIndex--;
-    if (responseIndex == 0) {
-      clearInterval(enterResponse);
-    }
-  }, 1600);
-}
-
-quiz(generateRandomResponses());
-for (var i = 0; i < 10; i++) {
-  feedbackBoxes[i].innerHTML = "_";
-  userEntryBoxes[i].innerHTML = "_";
-}
-
-setInterval(function () {
+//Initializes the program
+var responses = generateRandomResponses();
+quiz(responses);
+quizInterval = setInterval(function () {
   for (var i = 0; i < 10; i++) {
-    // Enable this to clear previous answer
-    //feedbackBoxes[i].innerHTML = "_";
+    feedbackBoxes[i].innerHTML = "_";
+    feedbackBoxes[i].style.color = "#444"
     userEntryBoxes[i].innerHTML = "_";
   }
-  const responses = generateRandomResponses();
+  responses = generateRandomResponses();
   quiz(responses);
 }, 10000);
 
-function initiate() {}
+// Manages the program state
+// Starts it when the page opens.
+// Cancels it when the user leaves
+document.addEventListener('visibilitychange', function() {
+  resetAllBoxes();
+  if (document.hidden) {
+    clearInterval(digitInterval);
+    clearInterval(responseInterval);
+    clearInterval(quizInterval);
+    responses = undefined;
+  } else {
+    responses = generateRandomResponses();
+    quiz(responses);
+    quizInterval = setInterval(function () {
+      responses = generateRandomResponses();
+      quiz(responses);
+    }, 10000);
+  }
+});
 
-function turn() {}
+// Runs a "quiz": four wrong responses and a right one
+function quiz(responses) {
+  var responseIndex = 4;
+  responseInterval = setInterval(function () {
+    clearUserEntryBoxes();
 
-function createEntryArray() {
-  var digits = generateRandomResponses();
+    // One by one, update the text boxes
+    var digitIndex = 0;
+    digitInterval = setInterval(function () {
+      userEntryBoxes[digitIndex].innerHTML = responses[responseIndex][digitIndex];
+      digitIndex++;
+      // once the digits have been entered
+      if (digitIndex == 10){ 
+        clearInterval(digitInterval)
+        updateFeedbackBoxes(responses[responseIndex], responses[0]);
+        responseIndex--;
+      }
+    }, typeSpeed)
 
+    if (responseIndex == 0) {
+      clearInterval(responseInterval);
+    }
+  }, typeSpeed * 10 + timeBetweenResponses);
+}
+
+function clearUserEntryBoxes(){
+  for (var i=0; i<10; i++){
+    userEntryBoxes[i].innerHTML = "_";
+  }
+}
+
+function resetAllBoxes(){
+  for (var i = 0; i < 10; i++) {
+    feedbackBoxes[i].innerHTML = "_";
+    feedbackBoxes[i].style.color = "#444"
+    userEntryBoxes[i].innerHTML = "_";
+  }
+}
+
+function updateFeedbackBoxes(entry, correctAnswer){
+  for (var i = 0; i < 10; i++) {
+    feedbackBoxes[i].innerHTML = entry[i];
+    if (entry[i] == correctAnswer[i]) {
+      feedbackBoxes[i].style.color = "rgb(5, 74, 4)";
+    } else {
+      feedbackBoxes[i].style.color = "rgb(117, 1, 1)";
+    }
+  }
 }
 
 // Creates a list of responses, starting with the correct one
@@ -106,15 +129,23 @@ function generateRandomResponses() {
     // The new wrong answer starts out as the previous one..
     wrongAnswer = responses[i].slice();
     // and then one digit is randomly changed
-    wrongAnswer[wrongIndices[i]] = randomDigit();
+    wrongAnswer[wrongIndices[i]] = randomDigitExcept(correctAns[wrongIndices[i]]);
     responses.push(wrongAnswer);
   }
 
   return responses;
 }
 
-function randomDigit() {
+// Give a random digit that isn't avoidThisDigit
+function randomDigitExcept(avoidThisDigit) {
+  const digit = randomDigit();
+  if (digit == avoidThisDigit){
+    return randomDigitExcept(avoidThisDigit)
+  }
+  return digit;
+}
+
+function randomDigit(){
   return Math.floor(9 * Math.random(0, 9)).toString();
 }
 
-createEntryArray();

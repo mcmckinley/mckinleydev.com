@@ -11,6 +11,7 @@ var digitInterval = undefined;
 // Milliseconds between each digit entry and response
 const typeSpeed = 100; 
 const timeBetweenResponses = 200; 
+const timeBetweenQuizzes = (typeSpeed * 10 + timeBetweenResponses)*7;
 
  // HTML text elements
 var feedbackBoxes = [];
@@ -31,7 +32,7 @@ quizInterval = setInterval(function () {
   }
   responses = generateRandomResponses();
   quiz(responses);
-}, 10000);
+}, timeBetweenQuizzes);
 
 // Manages the program state
 // Starts it when the page opens.
@@ -42,6 +43,7 @@ document.addEventListener('visibilitychange', function() {
     clearInterval(digitInterval);
     clearInterval(responseInterval);
     clearInterval(quizInterval);
+    
     responses = undefined;
   } else {
     responses = generateRandomResponses();
@@ -49,7 +51,7 @@ document.addEventListener('visibilitychange', function() {
     quizInterval = setInterval(function () {
       responses = generateRandomResponses();
       quiz(responses);
-    }, 10000);
+    }, timeBetweenQuizzes);
   }
 });
 

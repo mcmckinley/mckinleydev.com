@@ -72,3 +72,22 @@ header div h1, h2 {
     background-color: #b44;
 }
 
+
+a:link {
+    color: white;
+    text-decoration: none;
+}
+  
+a:visited {
+    color: white;
+    text-decoration: none;
+}
+a:hover {
+    color: #bbb;
+    text-decoration: none;
+}
+
+a:active {
+    color: #999;
+    text-decoration: none;
+}

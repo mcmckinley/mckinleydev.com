@@ -70,8 +70,15 @@ header div h1, h2 {
     font-weight: 600;
     margin: 10px 0px;
 }
+.left h3 { /* Privacy policy header*/
+    font-size: 24px;
+    font-weight: 600;
+    margin: 2cqb 0px 10px 0px;
+}
+
 .left p {
-    font-size: 20px;
+    font-size: 18px;
+    margin: 3px 15px;
 }
 
 .image {

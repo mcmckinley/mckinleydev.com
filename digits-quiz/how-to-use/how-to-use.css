@@ -52,8 +52,8 @@ header div h1, h2 {
 
 .how-to-bar {
     width: 100%;
-    height: 500px;
-    margin-top: 20px;
+    height: 650px;
+    margin-top: 50px;
 
     display: flex;
     align-items: center;
@@ -63,7 +63,7 @@ header div h1, h2 {
 
 .how-to-text {
     height: 100%;
-    width: 60%;
+    width: 70%;
 }
 
 .how-to-text h1 {
@@ -73,13 +73,19 @@ header div h1, h2 {
 .how-to-text p {
     font-size: 20px;
     margin: 2cap;
+    font-weight: 300
 }
 
 .how-to-image {
     height: 100%;
-    width: 40%;
-    background-color: #b44;
+    width: auto;
 }
+
+img {
+    max-height: 100%;
+    border-radius: 14px;
+}
+
 
 
 a:link {

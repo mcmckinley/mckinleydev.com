@@ -3,6 +3,8 @@ html, body {
     height: auto;
     margin: 0;
     background-color: #222;
+    font-family: 'Montserrat', sans-serif;
+
 }
 /*
 @media (max-width: 1417px) {
@@ -137,4 +139,13 @@ a:hover {
 a:active {
     color: #999;
     text-decoration: none;
+}
+
+footer {
+    width: 100%;
+    height: auto;
+    background-color: black;
+    text-align: center;
+    padding: 10px;
+    color: white;
 }

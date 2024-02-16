@@ -105,3 +105,11 @@ a:active {
     color: #999;
     text-decoration: none;
 }
+
+footer {
+    width: 100%;
+    height: auto;
+    background-color: black;
+    text-align: center;
+    padding: 10px;
+}

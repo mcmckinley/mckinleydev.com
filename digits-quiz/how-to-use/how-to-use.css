@@ -60,9 +60,14 @@ header div h1, h2 {
     text-align: center;
 }
 
+
 .how-to-container {
     padding: 0 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
 .blank-space {
     width: 100%;
     height: 100px;
@@ -70,6 +75,7 @@ header div h1, h2 {
 
 .how-to-bar {
     width: 100%;
+    max-width: 850px;
     height: 650px;
     margin-top: 50px;
     margin-bottom: 50px;

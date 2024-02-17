@@ -38,6 +38,16 @@ a:active {
 }
 */
 
+.home-button-link {
+    width: 8vh;
+}
+
+.home-button {
+    width: 80%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 header {
     width: 100%;
     height: auto;

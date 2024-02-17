@@ -20,6 +20,16 @@ html, body {
 }
 */
 
+.home-button-link {
+    width: 8vh;
+}
+
+.home-button {
+    width: 80%;
+    border-radius: 10px;
+    padding: 5px;
+}
+
 header {
     width: 100%;
     max-width: 100%;
@@ -27,7 +37,7 @@ header {
     position: fixed;
     z-index: 2;
 
-    background-color: #1031c4;
+    background-color: #001f92;
     
     font-family: 'Montserrat', sans-serif;
     color: #fff;

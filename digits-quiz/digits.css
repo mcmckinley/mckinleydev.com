@@ -6,19 +6,6 @@ html, body {
     font-family: 'Montserrat', sans-serif;
 
 }
-/*
-@media (max-width: 1417px) {
-    html, body {
-        height: calc(200vh + 1975px);
-    }
-}
-
-@media (min-width: 1418px) {
-    html, body {
-        height: calc(200vh + 1350px);
-    }
-}
-*/
 
 .home-button-link {
     width: 8vh;
@@ -106,13 +93,13 @@ header div h1, h2 {
     
     font-family: Menlo, monospace;
     color: #444;
-    font-size: 140px;
+    font-size: 10vw;
 }
 .user-entry {
     font-family: Menlo, monospace;
     color: #444;
     display: flex ;
-    font-size: 140px;
+    font-size: 10vw;
 }
 
 .top-div {

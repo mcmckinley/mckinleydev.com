@@ -26,7 +26,7 @@ header {
     position: fixed;
     z-index: 2;
 
-    background-color: #1031c4;
+    background-color: #001f92;
     
     color: #fff;
 }
@@ -62,22 +62,42 @@ header div h1, h2 {
 .left {
     width: 50%;
     height: 100%;
-    background-color: #222;
-    padding: 15px;
+    background-color: #222222;
+    border-radius: 20px 0px 0px 20px;
+    
 }
 .left h1 { /* Privacy policy header*/
     font-size: 34px;
     font-weight: 600;
-    margin: 10px 0px;
+    margin: 20px 20px;
 }
 .left p {
     font-size: 20px;
+    margin: 30px 20px;
+    font-weight: 300;
 }
-
+/*
 .image {
     width: 50%;
     height: 100%;
     background-color: #467;
+}
+*/
+.image {
+    height: 100%;
+    width: 400px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #222230;
+    border-radius: 0px 20px 20px 0px;
+}
+
+img {
+    max-height: 50%;
+    border-radius: 20px;
 }
 
 

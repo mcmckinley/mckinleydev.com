@@ -7,7 +7,6 @@ html, body {
     color: white;
 }
 
-
 .home-button-link {
     width: 8vh;
 }
@@ -16,28 +15,6 @@ html, body {
     width: 80%;
     border-radius: 10px;
     padding: 5px;
-}
-
-header {
-    width: 100%;
-    height: auto;
-    position: fixed;
-    z-index: 2;
-
-    background-color: #001f92;
-    
-    color: #fff;
-}
-
-header div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-header div h1, h2 {
-    padding: 0 15px;
-    text-align: center;
 }
 
 .main-section {
@@ -75,13 +52,6 @@ header div h1, h2 {
     margin: 30px 20px;
     font-weight: 300;
 }
-/*
-.image {
-    width: 50%;
-    height: 100%;
-    background-color: #467;
-}
-*/
 
 .image {
     height: 100%;
@@ -108,31 +78,4 @@ img {
         width: 100%;
         border-radius: 20px;
     }
-}
-
-header a:link {
-    color: white;
-    text-decoration: none;
-}
-
-header a:visited {
-    color: white;
-    text-decoration: none;
-}
-header a:hover {
-    color: #bbb;
-    text-decoration: none;
-}
-
-header a:active {
-    color: #999;
-    text-decoration: none;
-}
-
-footer {
-    width: 100%;
-    height: auto;
-    background-color: black;
-    text-align: center;
-    padding: 10px;
 }

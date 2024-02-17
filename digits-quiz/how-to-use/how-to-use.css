@@ -5,23 +5,6 @@ html, body {
     color: white;
 }
 
-a:link {
-    color: white;
-    text-decoration: none;
-}
-a:visited {
-    color: white;
-    text-decoration: none;
-}
-a:hover {
-    color: #bbb;
-    text-decoration: none;
-}
-
-a:active {
-    color: #999;
-    text-decoration: none;
-}
 .home-button-link {
     width: 8vh;
 }
@@ -30,28 +13,6 @@ a:active {
     width: 80%;
     border-radius: 10px;
     padding: 5px;
-}
-
-header {
-    width: 100%;
-    height: auto;
-    position: fixed;
-    z-index: 2;
-
-    background-color: #001f92;
-    
-    color: #fff;
-}
-
-header div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-header div h1, h2 {
-    padding: 0 1vw;
-    text-align: center;
 }
 
 .how-to-header {
@@ -72,19 +33,6 @@ header div h1, h2 {
     height: 90px;
 }
 
-/*
-@media (max-width: 720px) {
-    .how-to-text {
-        display: none;
-    }
-}
-
-@media (min-width: 721px) {
-
-}
-*/
-
-
 .how-to-container {
     padding: 0 3%;
     display: flex;
@@ -97,7 +45,6 @@ header div h1, h2 {
     max-width: 850px;
     height: 650px;
     margin-top: 50px;
-    /*margin-bottom: 50px;*/
 
     display: flex;
     align-items: center;
@@ -150,12 +97,4 @@ header div h1, h2 {
 img {
     max-height: 650px;
     border-radius: 14px;
-}
-
-footer {
-    width: 100%;
-    height: auto;
-    background-color: black;
-    text-align: center;
-    padding: 2vh 0;
 }

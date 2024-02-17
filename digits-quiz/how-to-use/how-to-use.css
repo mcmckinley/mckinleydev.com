@@ -111,14 +111,9 @@ header div h1, h2 {
         flex-direction: column;
         height: auto;
         padding-bottom: 20px;
-
     }
 }
 
-/* Display the instructions on top of the phone screens */
-@media (min-width: 721px) {
-
-}
 .top {
     margin-top: 20px;
 }
@@ -130,6 +125,7 @@ header div h1, h2 {
     height: 100%;
     width: 70%;
 }
+
 @media (max-width: 720px) {
     .how-to-text {
         width: 100%;

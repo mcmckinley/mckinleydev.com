@@ -52,6 +52,14 @@ html, body {
     margin: 30px 20px;
     font-weight: 300;
 }
+@media (max-width: 400px){
+    .left h1 {
+        font-size: 24px;
+    }
+    .left p {
+        font-size: 16px;
+    }
+}
 
 .image {
     height: 100%;
@@ -67,6 +75,7 @@ html, body {
 
 img {
     max-height: 50%;
+    max-width: 90%;
     border-radius: 20px;
 }
 

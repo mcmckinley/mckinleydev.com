@@ -1,7 +1,3 @@
-// Obfuscated for efficiency. Refer to the following instead.
-
-//https://github.com/mcmckinley/SudokuSolver/blob/main/sudoku.js
-
 (function() {
     var _onload = function() {
       var pretag = document.getElementById("ascii-art");

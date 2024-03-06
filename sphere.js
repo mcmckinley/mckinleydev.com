@@ -1,7 +1,7 @@
 (function() {
   var _onload = function() {
 
-    var pretag = document.getElementById("3drendering-display");
+    var pretag = document.getElementById("ascii-art");
 
     // Rotation in each direction
     var A=0;
@@ -23,7 +23,8 @@
         A+=0.04;
         B+=0.05;
         C+=0.01;
-        renderCube([A, B, C]);
+        //renderCube([A, B, C]);
+
 
         function renderCube(r){
           var normals = [
@@ -39,7 +40,6 @@
             normals[i] = rotate(normals[i], r)
           }
 
-
           for (var i=-4; i<4;i+=0.2){
             for (var j=-4; j<4;j+=0.2){
               var points = [
@@ -52,13 +52,37 @@
             ]            
               for (const direction in points){
                 renderPoint(
-                  rotate(points[direction], r), // The rotates point
+                  rotate(points[direction], r), // The rotated point
                   normals[direction] // Its corresponding normal vector
                 );
               }
             }
           }
         }
+
+        const pi = 3.14
+        var size = 6
+        function renderSphere(){
+          for (var theta = -pi / 2; theta < pi / 2; theta += 0.1){
+            for (var phi = 0; phi < 2 * pi; phi+= 0.1){
+              const x = Math.cos(theta) * Math.cos(phi)
+              const y = Math.sin(i)
+              const z = Math.cos(theta) * Math.sin(phi)
+              //console.log (x , y , x)
+
+              renderPoint(
+                [x*size, y*size, z*size],    //the point
+                [x, y, z]    //its normal
+              )
+            }
+          }
+        }
+
+        renderPoint([0, 0, 0], [0, 0, 1]);
+
+        renderSphere()
+
+
 
         function renderPoint(point, normal){
           // Points on screen
@@ -71,21 +95,27 @@
           }
           var intersect=screenx+(38)*screeny;
           
+          /*
           const lightvec = normalize([
             10-point[0], 
             10-point[1],
             10-point[2],
           ]);
+          
           const strength = 2.7**(-0.02*lightvec[3]);
           var luminance=0|strength*11*(dot(lightvec, normal));
           
-          
+          */
+
+
           var depth=1/(50-point[2]);
 
           if(depth>zBuffer[intersect])
           {
             zBuffer[intersect] = depth;
-            b[intersect] =  " .,-~:;!=*$#@"[luminance>0?luminance:0];
+            //b[intersect] =  " .,-~:;!=*$#@"[luminance>0?luminance:0]; ENABLE THIS FOR LIGHT
+            b[intersect] = '$'
+
           }
         }
 

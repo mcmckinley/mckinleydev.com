@@ -9,6 +9,7 @@
       var asciiframe=function() {
         var b=[];
 
+        
         var hSpaces = Math.floor(window.innerWidth/7);
         if (window.innerWidth < 500){
           hSpaces+=10;
@@ -18,9 +19,12 @@
         if (window.innerHeight < 600){
           vSpaces = Math.floor(window.innerHeight/13)
         }
-        //console.log(hSpaces);
+
+        var zBuffer=[];
+
         for(var k=0;k<hSpaces*vSpaces;k++) {
           b[k] = k%hSpaces == (hSpaces-1) ? "\n" : '`';
+          zBuffer[k] = 0;
         }
 
 
@@ -37,7 +41,10 @@
 
         renderCube(r);
 
+        /*
         function renderCube(r){
+
+
           for (var i=-side; i<side;i+=0.15){
             for (var j=-side; j<side;j+=0.15){
               renderPoint(rotate([i,side,j], r));
@@ -48,16 +55,78 @@
               renderPoint(rotate([i,j,-side], r));
             }
           }
+        }*/
+
+        function renderCube(r){
+          // Normal vectors for each face of the cube
+          var normals = [
+            [0, 1, 0],
+            [0, -1, 0],
+            [1, 0, 0],
+            [-1, 0, 0],
+            [0, 0, 1],
+            [0, 0, -1]
+          ]
+          
+          // Rotate each normal vector
+          for (var i=0; i<6; i++){
+            normals[i] = rotate(normals[i], r)
+          }
+
+
+          // For every point on one face of the cube, render that 
+          // point on each face.
+          for (var i = -side; i < side; i += 0.2){
+            for (var j = -side; j < side; j += 0.2){
+
+              var points = [
+                [i,    side,     j],
+                [i,   -side,     j],
+                [side,    i,     j],
+                [-side,   i,     j],
+                [i,       j,  side],
+                [i,       j, -side]
+              ]
+
+              for (const direction in points){
+                renderPoint(
+                  rotate(points[direction], r), // The rotated point
+                  normals[direction]            // Its normal vector
+                );
+              }
+            }
+          }
         }
 
-        function renderPoint(point){
+        function renderPoint(point, normal){
           const screenx = 0|6*(point[0]*(49)/(50-point[2]))+(hSpaces/2);
           const screeny = 0|(vSpaces/2)-3*(point[1]*(49)/(50-point[2]));
-          
-          if(screeny<vSpaces && screeny>0 && screenx>0 && screenx<hSpaces)
+
+          if(screeny>hSpaces || screeny<=0 || screenx<=0 || screenx>hSpaces)
+            return;
+
+          const intersect=screenx+(hSpaces)*screeny;
+
+          const lightvec = normalize([
+            0-point[0], 
+            0-point[1],
+            30-point[2],
+          ]);
+          const strength = 2.7**(-0.02*lightvec[3]);
+          var luminance=0|strength*11*(dot(lightvec, normal));
+
+          var depth=1/(50-point[2]);
+
+          if(depth>zBuffer[intersect])
           {
-            b[screenx+(hSpaces)*screeny] =  " ";
+            zBuffer[intersect] = depth;
+            b[intersect] =  " .,-~:;!=*$#@"[luminance>0?luminance:0];
           }
+
+          // if(screeny<vSpaces && screeny>0 && screenx>0 && screenx<hSpaces-1)
+          // {
+          //   b[intersect] =  " ";
+          // }
         }
 
         function rotate(v, r){
@@ -72,6 +141,13 @@
           const yprime = v[0]*(cosB*sinC) + v[1]*(sinA*sinB*sinC + cosA*cosC) + v[2]*(cosA*sinB*sinC - sinA*cosC);
           const zprime = v[0]*(-sinB)     +           v[1]*(sinA*cosB)                   + v[2]*(cosA*cosB);
           return [xprime, yprime, zprime];
+        }
+        function normalize(v){
+          const mag = Math.sqrt(v[0]**2 + v[1]**2 + v[2]**2);
+          return [v[0]/mag, v[1]/mag, v[2]/mag, mag]
+        }
+        function dot(a, b){
+          return (a[0]*b[0] + a[1]*b[1] + a[2]*b[2]);
         }
 
         pretag.innerHTML = b.join("");

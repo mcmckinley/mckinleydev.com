@@ -6,7 +6,21 @@
       var tmr1 = undefined;
 
       var r = [0, 0, 0];
+
+      const myname = "michael mckinley"
+
+      var mouseX = 100
+      var mouseY = 100
+
+      document.addEventListener('mousemove', function (e) {
+        // Update the mouse coordinates
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+      });
+
       var asciiframe=function() {
+        var lightSource = [mouseX/43 - 18, -mouseY/42 + 10, 5]
+
         var b=[];
 
         
@@ -23,39 +37,23 @@
         var zBuffer=[];
 
         for(var k=0;k<hSpaces*vSpaces;k++) {
-          b[k] = k%hSpaces == (hSpaces-1) ? "\n" : '`';
+          b[k] = k % hSpaces == (hSpaces-1) ? "\n" : ' ';
           zBuffer[k] = 0;
         }
 
-
+        // Adjust the side length of the cube with the screen
         var side = 0;
-        if (window.innerWidth > 1400) {
-          side = 7;
+        if (window.innerWidth > 1000) {
+          side = 4;
         } else {
-          side = window.innerWidth/200;
+          side = window.innerWidth/250;
         }
         
-        r[0]+=0.005;
-        r[1]+=0.002;
-        r[2]+=0.006;
+        // r[0]+=0.015;
+        // r[1]+=0.006;
+        // r[2]+=0.018;
 
-        renderCube(r);
-
-        /*
-        function renderCube(r){
-
-
-          for (var i=-side; i<side;i+=0.15){
-            for (var j=-side; j<side;j+=0.15){
-              renderPoint(rotate([i,side,j], r));
-              renderPoint(rotate([i,-side,j], r));
-              renderPoint(rotate([side,i,j], r));
-              renderPoint(rotate([-side,i,j], r));
-              renderPoint(rotate([i,j,side], r));
-              renderPoint(rotate([i,j,-side], r));
-            }
-          }
-        }*/
+        // renderCube(r);
 
         function renderCube(r){
           // Normal vectors for each face of the cube
@@ -97,6 +95,34 @@
             }
           }
         }
+        function renderSphere(){
+          for (var i = 0; i < 3.14; i += 0.03){
+            for (var k = -1.57; k < 1.57; k += 0.03){
+              const x = Math.cos(k)*Math.cos(i)
+              const y = Math.sin(k)
+              const z = Math.cos(k)*Math.sin(i)
+
+              renderPoint(
+                [x*side, y*side, z*side],
+                [x, y, z]
+              )
+            }
+          }
+        }
+
+        renderSphere()
+
+        // renderPoint(
+        //   [0, 0, 0],
+        //   [0, 0, 1]
+        // )
+
+        // renderPoint(
+        //   [mouseX/43 - 18, -mouseY/42 + 10, 1],
+        //   [0, 0, 1]
+        // )
+
+
 
         function renderPoint(point, normal){
           const screenx = 0|6*(point[0]*(49)/(50-point[2]))+(hSpaces/2);
@@ -108,9 +134,9 @@
           const intersect=screenx+(hSpaces)*screeny;
 
           const lightvec = normalize([
-            0-point[0], 
-            0-point[1],
-            30-point[2],
+            lightSource[0]-point[0], 
+            lightSource[1]-point[1],
+            lightSource[2]-point[2],
           ]);
           const strength = 2.7**(-0.02*lightvec[3]);
           var luminance=0|strength*11*(dot(lightvec, normal));
@@ -121,6 +147,8 @@
           {
             zBuffer[intersect] = depth;
             b[intersect] =  " .,-~:;!=*$#@"[luminance>0?luminance:0];
+            // b[intersect] =  "0123456789"[luminance>0?luminance:0];
+
           }
 
           // if(screeny<vSpaces && screeny>0 && screenx>0 && screenx<hSpaces-1)

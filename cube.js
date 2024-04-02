@@ -1,35 +1,50 @@
 var pretag = document.getElementById("ascii-art");
 
-var r = [0, 0.1, 0.00];
+// var r = [0.003, 0.005, 0.002];
+ var r = [0.03, 0.05, 0.02];
+
 var centerOfRotation = {
-  x: -10, y: 0, z: 0
+  x: 0, y: 0, z: 0
 }
 
 var spheres = [
   {
-    x: 15,
+    x: 10,
     y: 0,
     z: 0,
     r: 4
   },
-  // {
-  //   x: 0,
-  //   y: 0,
-  //   z: -10,
-  //   r: 4
-  // },
-  // {
-  //   x: -10,
-  //   y: 0,
-  //   z: 0,
-  //   r: 4
-  // },
-  // {
-  //   x: 0,
-  //   y: 0,
-  //   z: 10,
-  //   r: 4
-  // },
+  {
+    x: 0,
+    y: 0,
+    z: -10,
+    r: 4
+  },
+  {
+    x: -10,
+    y: 0,
+    z: 0,
+    r: 4
+  },
+  {
+    x: 0,
+    y: 0,
+    z: 10,
+    r: 4
+  },
+  {
+    x: 0,
+    y: 10,
+    z: 0,
+    r: 4
+  },
+  {
+    x: 0,
+    y: -10,
+    z: 0,
+    r: 4
+  },
+
 ]
 
 var count = 0
@@ -55,11 +70,11 @@ document.addEventListener("mousemove", function (e) {
 
 var asciiframe = function () {
 
-  // Make the light source be the mouse 
-  // var lightSource = [mouseX / 43 - 18, -mouseY / 42 + 10, 5];
 
-  // Static light source
-  var lightSource = [0, 0, 0]
+  var lightSources = [
+    // [0, 0, 0], // origin
+    [mouseX / 43 - 18, -mouseY / 42 + 10, 0] // tracks mouse
+  ]
 
   var b = [];
 
@@ -79,8 +94,6 @@ var asciiframe = function () {
   // } else {
   //   side = window.innerWidth / 250;
   // }
-
-  
 
   // renderCube(r);
 
@@ -172,21 +185,38 @@ var asciiframe = function () {
   // )
 
   function renderPoint(point, normal) {
-    const screenx = 0 | (6 * ((point[0] * 49) / (50 - point[2])) + hSpaces / 2);
-    const screeny = 0 | (vSpaces / 2 - 3 * ((point[1] * 49) / (50 - point[2])));
+    const m = 3 // magnification
+    const d = 50 // distance from camera
+
+    const px = point[0] // x coord of point
+    const py = point[1] // y coord of point
+    const pz = point[2] // z coord of point
+
+    const dx = hSpaces / 2 // treat the center of the screen as (0,0) 
+    const dy = vSpaces / 2 
+
+
+    const screenx = 0 | (dx + m * 2 * ((px * 49) / (d - pz)));
+    const screeny = 0 | (dy - m * ((py * 49) / (d - pz)));
 
     if (screeny > hSpaces || screeny <= 0 || screenx <= 0 || screenx > hSpaces - 2)
       return;
 
     const intersect = screenx + hSpaces * screeny;
 
-    const lightvec = normalize([
-      lightSource[0] - point[0],
-      lightSource[1] - point[1],
-      lightSource[2] - point[2],
-    ]);
-    const strength = 2.7 ** (-0.02 * lightvec[3]);
-    var luminance = 0 | (strength * 11 * dot(lightvec, normal));
+    var luminance = 0
+    for (var i = 0; i < lightSources.length; i++){
+      const lightSource = lightSources[i]
+      const lightvec = normalize([
+        lightSource[0] - point[0],
+        lightSource[1] - point[1],
+        lightSource[2] - point[2],
+      ]);
+      const strength = 2.7 ** (-0.02 * lightvec[3]);
+      luminance += 0 | (strength * 11 * dot(lightvec, normal));
+    }
+    if (luminance > 11)
+      luminance = 11
 
     var depth = 1 / (50 - point[2]);
 

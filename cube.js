@@ -7,44 +7,77 @@ var centerOfRotation = {
   x: 0, y: 0, z: 0
 }
 
-var spheres = [
+// var spheres = [
+//   {
+//     x: 10,
+//     y: 0,
+//     z: 0,
+//     r: 4
+//   },
+//   {
+//     x: 0,
+//     y: 0,
+//     z: -10,
+//     r: 4
+//   },
+//   {
+//     x: -10,
+//     y: 0,
+//     z: 0,
+//     r: 4
+//   },
+//   {
+//     x: 0,
+//     y: 0,
+//     z: 10,
+//     r: 4
+//   },
+//   {
+//     x: 0,
+//     y: 10,
+//     z: 0,
+//     r: 4
+//   },
+//   {
+//     x: 0,
+//     y: -10,
+//     z: 0,
+//     r: 4
+//   },
+
+// ]
+
+var planets = [
+  {
+    x: 0, // SUN
+    y: 0,
+    z: 0,
+    r: 5,
+    m: 10,
+    vx: 0,
+    vy: 0,
+    vz: 0
+  },
   {
     x: 10,
     y: 0,
     z: 0,
-    r: 4
+    r: 2,
+    m: 2,
+    vx: 0,
+    vy: 0,
+    vz: 0.1
   },
-  {
-    x: 0,
-    y: 0,
-    z: -10,
-    r: 4
-  },
-  {
-    x: -10,
-    y: 0,
-    z: 0,
-    r: 4
-  },
-  {
-    x: 0,
-    y: 0,
-    z: 10,
-    r: 4
-  },
-  {
-    x: 0,
-    y: 10,
-    z: 0,
-    r: 4
-  },
-  {
-    x: 0,
-    y: -10,
-    z: 0,
-    r: 4
-  },
-
+  // {
+  //   x: -10,
+  //   y: 0,
+  //   z: 0,
+  //   r: 1,
+  //   m: 1,
+  //   vx: 0,
+  //   vy: 0,
+  //   vz: 0.1
+  // },
 ]
 
 var count = 0
@@ -73,12 +106,10 @@ var asciiframe = function () {
 
   var lightSources = [
     // [0, 0, 0], // origin
-    [mouseX / 43 - 18, -mouseY / 42 + 10, 0] // tracks mouse
+    [mouseX / 43 - 18, -mouseY / 42 + 10, 20] // tracks mouse
   ]
 
   var b = [];
-
-  
 
   var zBuffer = [];
 
@@ -135,6 +166,7 @@ var asciiframe = function () {
       }
     }
   }
+
   function renderSphere(sphere) {
 
     for (var i = 0; i < 3.14; i += 0.03) {
@@ -154,39 +186,52 @@ var asciiframe = function () {
     }
   }
 
-  count += 0.1
+  function updatePlanetPositions(){
+    for (const planet in planets){
+      for (const otherPlanet in planets){
+          if (planet != otherPlanet){
+              const r = distanceBetween(planets[planet], planets[otherPlanet]);
+              const G = 0.0005;
 
-  // r[0]+=0.015;
-  // r[1]+=0.006;
-  // r[2]+=0.018;
+              const netAcceleration = G * planets[otherPlanet].m / r
 
-  // r[0] = Math.cos(count)
-  // r[1] += Math.cos(count) / 100
-  // r[2] = Math.cos(count)
+              const i = (planets[otherPlanet].x - planets[planet].x) / r
+              const j = (planets[otherPlanet].y - planets[planet].y) / r
+              const k = (planets[otherPlanet].z - planets[planet].z) / r
 
-  
+              planets[planet].vx += netAcceleration * i
+              planets[planet].vy += netAcceleration * j
+              planets[planet].vz += netAcceleration * k
+          }
+      }
+    }
 
-  for (var i = 0; i < spheres.length; i++){
-    spheres[i] = rotateVecAboutPoint(spheres[i], r, centerOfRotation)
-    renderSphere(spheres[i])
+    for (const planet in planets){
+      planets[planet].x += planets[planet].vx;
+      planets[planet].y += planets[planet].vy;
+      planets[planet].z += planets[planet].vz;
+    }
   }
+
+  // For gravity:
+  updatePlanetPositions()
+  for (var i = 0; i < planets.length; i++){
+    renderSphere(planets[i])
+  }
+
+  //  console.log(planets)
+  
+  // for (var i = 0; i < spheres.length; i++){
+  //   spheres[i] = rotateVecAboutPoint(spheres[i], r, centerOfRotation)
+  //   renderSphere(spheres[i])
+  // }
 
   // renderSphere(sphere2)
   // renderSphere(sphere1);
 
-  // renderPoint(
-  //   [0, 0, 0],
-  //   [0, 0, 1]
-  // )
-
-  // renderPoint(
-  //   [mouseX/43 - 18, -mouseY/42 + 10, 1],
-  //   [0, 0, 1]
-  // )
-
   function renderPoint(point, normal) {
     const m = 3 // magnification
-    const d = 50 // distance from camera
+    const d = 50 // distance of camera from viewing plane 
 
     const px = point[0] // x coord of point
     const py = point[1] // y coord of point
@@ -195,9 +240,8 @@ var asciiframe = function () {
     const dx = hSpaces / 2 // treat the center of the screen as (0,0) 
     const dy = vSpaces / 2 
 
-
-    const screenx = 0 | (dx + m * 2 * ((px * 49) / (d - pz)));
-    const screeny = 0 | (dy - m * ((py * 49) / (d - pz)));
+    const screenx = 0 | (dx + 2 * m * d * px / (d - pz));
+    const screeny = 0 | (dy -     m * d * py / (d - pz));
 
     if (screeny > hSpaces || screeny <= 0 || screenx <= 0 || screenx > hSpaces - 2)
       return;
@@ -218,6 +262,14 @@ var asciiframe = function () {
     if (luminance > 11)
       luminance = 11
 
+    // const lightvec = normalize([
+    //   planets[0].x - point[0],
+    //   planets[0].y - point[1],
+    //   planets[0].z - point[2],
+    // ]);
+    // const strength = 2.7 ** (-0.02 * lightvec[3]);
+    // const luminance = 0 | (strength * 11 * dot(lightvec, normal));
+
     var depth = 1 / (50 - point[2]);
 
     if (depth > zBuffer[intersect]) {
@@ -225,8 +277,6 @@ var asciiframe = function () {
       b[intersect] = " .,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
     }
   }
-
-  // function renderWord
 
   function rotate(v, r) {
     const sinA = Math.sin(r[0]),
@@ -306,8 +356,6 @@ var asciiframe = function () {
     return v;
   }
 
-
-
   function normalize(v) {
     const mag = Math.sqrt(v[0] ** 2 + v[1] ** 2 + v[2] ** 2);
     return [v[0] / mag, v[1] / mag, v[2] / mag, mag];
@@ -315,6 +363,10 @@ var asciiframe = function () {
 
   function dot(a, b) {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  }
+
+  function distanceBetween(A, B){
+    return Math.sqrt((A.x-B.x)**2 + (A.y-B.y)**2 + (A.z-B.z)**2);
   }
 
   pretag.innerHTML = b.join("");

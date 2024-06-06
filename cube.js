@@ -82,21 +82,22 @@ var planets = [
 
 var count = 0
 
+var hSpaces = Math.floor(window.innerWidth / 7);
+if (window.innerWidth < 500) {
+  hSpaces += 10;
+}
+
+// ... what is this doing??
+var vSpaces = Math.floor(window.innerHeight / 13); 
+if (window.innerHeight < 600) {
+  vSpaces = Math.floor(window.innerHeight / 13);
+}
+
+// Mouse capabilities
 var mouseX = 100;
 var mouseY = 100;
 
-var hSpaces = Math.floor(window.innerWidth / 7);
-  if (window.innerWidth < 500) {
-    hSpaces += 10;
-  }
-
-  var vSpaces = Math.floor(window.innerHeight / 13);
-  if (window.innerHeight < 600) {
-    vSpaces = Math.floor(window.innerHeight / 13);
-  }
-
 document.addEventListener("mousemove", function (e) {
-  // Update the mouse coordinates
   mouseX = e.clientX;
   mouseY = e.clientY;
 });
@@ -106,7 +107,8 @@ var asciiframe = function () {
 
   var lightSources = [
     // [0, 0, 0], // origin
-    [mouseX / 43 - 18, -mouseY / 42 + 10, 20] // tracks mouse
+    // [mouseX / 43 - 18, -mouseY / 42 + 10, 20] // tracks mouse
+    [0 , - scrollTop / 42 + 10, 20] // tracks how much the user has scrolled
   ]
 
   var b = [];
@@ -168,7 +170,6 @@ var asciiframe = function () {
   }
 
   function renderSphere(sphere) {
-
     for (var i = 0; i < 3.14; i += 0.03) {
       for (var k = -1.57; k < 1.57; k += 0.03) {
         const x = Math.cos(k) * Math.cos(i);
@@ -218,16 +219,6 @@ var asciiframe = function () {
   for (var i = 0; i < planets.length; i++){
     renderSphere(planets[i])
   }
-
-  //  console.log(planets)
-  
-  // for (var i = 0; i < spheres.length; i++){
-  //   spheres[i] = rotateVecAboutPoint(spheres[i], r, centerOfRotation)
-  //   renderSphere(spheres[i])
-  // }
-
-  // renderSphere(sphere2)
-  // renderSphere(sphere1);
 
   function renderPoint(point, normal) {
     const m = 3 // magnification

@@ -55,42 +55,10 @@ html, body {
     font-weight: 300;
 }
 
-.right {
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center; /* Center horizontally */
-    
-
-    width: 50%;
-    height: 100%;
-    background-color: #202020;
-}
-
-.right p {
-    margin: 10px 0px;
-}
-
-.feedback {
-    display: flex;
-    
-    font-family: Menlo, monospace;
-    color: #444;
-    font-size: 6vw;
-
-
-}
-.user-entry {
-    font-family: Menlo, monospace;
-    color: #444;
-    display: flex ;
-    font-size: 6vw;
-}
-
 .app-store-button img {
     margin: 0px 20px;
 
-    width: 150px; /* Adjust size as needed */
+    width: 150px;
     transition: transform 0.2s;
 }
 

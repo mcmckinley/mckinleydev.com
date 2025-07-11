@@ -14,7 +14,7 @@ header {
     position: fixed;
     z-index: 2;
 
-    background-color: #000;
+    background-color: #111;
     
     font-family: "Rubik", sans-serif;
 
@@ -74,7 +74,7 @@ header div h1, h2 {
 .fixed-background {
     position: fixed;
     z-index: -1;
-    background-color: black;
+    background-color: #222;
     color: white;
     width: 100vw;
     height: 100vh;
@@ -84,10 +84,12 @@ header div h1, h2 {
 
 /* the pre element, which contains the ascii art */
 .fixed-background pre {
-    background-color: #202020;
+    /* background-color: #202020; */
+    background-color: #222;
 
-    color:#aaa; 
-    font-size: 12px;
+    color: white; 
+    /* font-size: 12px; */
+    font-size: 8px;
     width: 100%;
     max-height: 100%;
 
@@ -110,10 +112,16 @@ letting you see through to the background. */
     height: 100vh;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     font-family: "Rubik", sans-serif;
     color: #fff;
+    padding-left: 3%;
+}
+
+.social-row img {
+    filter: invert(1);
 }
 
 .title {
@@ -130,6 +138,7 @@ letting you see through to the background. */
 }
 
 .title h1 {
+    opacity: 1;
     padding: 5px 10px;
     font-size: clamp(3px, 5vw, 60px);
 }

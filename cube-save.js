@@ -1,68 +1,65 @@
 var pretag = document.getElementById("ascii-art");
 
-var r = [0.03, 0.05, 0.02];
+// var r = [0.003, 0.005, 0.002];
+ var r = [0.03, 0.05, 0.02];
 
 var centerOfRotation = {
   x: 0, y: 0, z: 0
 }
 
-var framerate = 50
-
 var planets = [
   {
-    x: 20, // SUN
-    y: 3,
-    z: -20,
-    r: 25,
+    x: 0, // SUN
+    y: 0,
+    z: 0,
+    r: 5,
     m: 10,
     vx: 0,
     vy: 0,
     vz: 0
   },
-  // {
-  //   x: 10,
-  //   y: 0,
-  //   z: 0,
-  //   r: 2,
-  //   m: 2,
-  //   vx: 0,
-  //   vy: 0,
-  //   vz: 0.1
-  // },
+  {
+    x: 10,
+    y: 0,
+    z: 0,
+    r: 2,
+    m: 2,
+    vx: 0,
+    vy: 0,
+    vz: 0.1
+  },
 ]
 
 var count = 0
 
-var hSpaces = Math.floor(window.innerWidth / 5);
+var hSpaces = Math.floor(window.innerWidth / 7);
 if (window.innerWidth < 500) {
   hSpaces += 10;
 }
 
 // ... what is this doing??
-A = 0
-B = 0 
-C = 0
+var vSpaces = Math.floor(window.innerHeight / 13); 
+if (window.innerHeight < 600) {
+  vSpaces = Math.floor(window.innerHeight / 13);
+}
 
+// Mouse capabilities
+var mouseX = 100;
+var mouseY = 100;
 
-var vSpaces = Math.floor(window.innerHeight / 8); 
+document.addEventListener("mousemove", function (e) {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
 
 var asciiframe = function () {
-  A += 0.0003
-  B += 0.0003
-  C += 0.000
 
 
   var lightSources = [
     // [0, 0, 0], // origin
+    // [mouseX / 43 - 18, -mouseY / 42 + 10, 20] // tracks mouse
     [0 , - scrollTop / 42 + 10, 20] // tracks how much the user has scrolled
   ]
-
-
-  function getScrollTop() {
-    return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-  }
-
-  planets[0].y = getScrollTop() / 1000
 
   var b = [];
 
@@ -122,44 +119,19 @@ var asciiframe = function () {
     }
   }
 
-
-  const renderDistance = 23
-
-
   function renderSphere(sphere) {
-    // render a tropic/equator
-    for (var i = 0; i < 3.14 * 2; i += 0.1) {
-
-
-      // var density = ((i) * (i - 6.2) / 9.2) + 1;
-      // if (density < 0.01) density = 0.01;
-
-      var density = 0.1;
-
-      for (var k = -1.57; k < 1.57; k += density) {
+    for (var i = 0; i < 3.14; i += 0.03) {
+      for (var k = -1.57; k < 1.57; k += 0.03) {
         const x = Math.cos(k) * Math.cos(i);
         const y = Math.sin(k);
         const z = Math.cos(k) * Math.sin(i);
 
-        // renderPoint([
-        //     x * sphere.r + sphere.x, 
-        //     y * sphere.r + sphere.y, 
-        //     z * sphere.r + sphere.z
-        //   ], 
-        //   [x, y, z]
-        // );
-
-        // To rotate the sphere
-        renderPoint(
-          rotateAboutPoint([
-            x * sphere.r + sphere.x,
-            y * sphere.r + sphere.y,
-            z * sphere.r + sphere.z,
-            ], 
-            [A, B, C],
-            [sphere.x, sphere.y, sphere.z]
-          ), 
-          [x, y, z]
+        renderPoint([
+          x * sphere.r + sphere.x, 
+          y * sphere.r + sphere.y, 
+          z * sphere.r + sphere.z
+        ], 
+        [x, y, z]
         );
       }
     }
@@ -169,7 +141,7 @@ var asciiframe = function () {
     for (const planet in planets){
       for (const otherPlanet in planets){
           if (planet != otherPlanet){
-              const r = distance(planets[planet], planets[otherPlanet]);
+              const r = distanceBetween(planets[planet], planets[otherPlanet]);
               const G = 0.0005;
 
               const netAcceleration = G * planets[otherPlanet].m / r
@@ -199,18 +171,12 @@ var asciiframe = function () {
   }
 
   function renderPoint(point, normal) {
-    // notes: the camera is assumed to be 0,0,0
-
     const m = 3 // magnification
     const d = 50 // distance of camera from viewing plane 
 
     const px = point[0] // x coord of point
     const py = point[1] // y coord of point
     const pz = point[2] // z coord of point
-
-    const distanceFromCamera = distance([px,py,pz])
-
-    if (distanceFromCamera > renderDistance) return;
 
     const dx = hSpaces / 2 // treat the center of the screen as (0,0) 
     const dy = vSpaces / 2 
@@ -223,21 +189,19 @@ var asciiframe = function () {
 
     const intersect = screenx + hSpaces * screeny;
 
-    // var luminance = 0
-    // for (var i = 0; i < lightSources.length; i++){
-    //   const lightSource = lightSources[i]
-    //   const lightvec = normalize([
-    //     lightSource[0] - point[0],
-    //     lightSource[1] - point[1],
-    //     lightSource[2] - point[2],
-    //   ]);
-    //   const strength = 2.7 ** (-0.02 * lightvec[3]);
-    //   luminance += 0 | (strength * 11 * dot(lightvec, normal));
-    // }
-    // if (luminance > 11)
-    //   luminance = 11
-    
-    luminance = 1
+    var luminance = 0
+    for (var i = 0; i < lightSources.length; i++){
+      const lightSource = lightSources[i]
+      const lightvec = normalize([
+        lightSource[0] - point[0],
+        lightSource[1] - point[1],
+        lightSource[2] - point[2],
+      ]);
+      const strength = 2.7 ** (-0.02 * lightvec[3]);
+      luminance += 0 | (strength * 11 * dot(lightvec, normal));
+    }
+    if (luminance > 11)
+      luminance = 11
 
     // const lightvec = normalize([
     //   planets[0].x - point[0],
@@ -279,7 +243,7 @@ var asciiframe = function () {
     return [xprime, yprime, zprime];
   }
 
-  function rotateAboutPoint(v, r, p) {
+  function rotateVec(v, r) {
     const sinA = Math.sin(r[0]),
       cosA = Math.cos(r[0]),
       sinB = Math.sin(r[1]),
@@ -288,21 +252,48 @@ var asciiframe = function () {
       cosC = Math.cos(r[2]);
 
     const xprime =
-      (v[0] - p[0]) * (cosB * cosC) +
-      (v[1] - p[1]) * (sinA * sinB * cosC - cosA * sinC) +
-      (v[2] - p[2]) * (cosA * sinB * cosC + sinA * sinC);
+      v.x * (cosB * cosC) +
+      v.y * (sinA * sinB * cosC - cosA * sinC) +
+      v.z * (cosA * sinB * cosC + sinA * sinC);
     const yprime =
-      (v[0] - p[0]) * (cosB * sinC) +
-      (v[1] - p[1]) * (sinA * sinB * sinC + cosA * cosC) +
-      (v[2] - p[2]) * (cosA * sinB * sinC - sinA * cosC);
+      v.x * (cosB * sinC) +
+      v.y * (sinA * sinB * sinC + cosA * cosC) +
+      v.z * (cosA * sinB * sinC - sinA * cosC);
     const zprime = 
-      (v[0] - p[0]) * -sinB + 
-      (v[1] - p[1]) * (sinA * cosB) + 
-      (v[2] - p[2]) * (cosA * cosB);
+      v.x * -sinB + 
+      v.y * (sinA * cosB) + 
+      v.z * (cosA * cosB);
 
-    v[0] = xprime + p[0]
-    v[1] = yprime + p[1]
-    v[2] = zprime + p[2]
+    v.x = xprime
+    v.y = yprime
+    v.z = zprime
+    return v;
+  }
+
+  function rotateVecAboutPoint(v, r, p) {
+    const sinA = Math.sin(r[0]),
+      cosA = Math.cos(r[0]),
+      sinB = Math.sin(r[1]),
+      cosB = Math.cos(r[1]),
+      sinC = Math.sin(r[2]),
+      cosC = Math.cos(r[2]);
+
+    const xprime =
+      (v.x - p.x) * (cosB * cosC) +
+      (v.y - p.y) * (sinA * sinB * cosC - cosA * sinC) +
+      (v.z - p.z) * (cosA * sinB * cosC + sinA * sinC);
+    const yprime =
+      (v.x - p.x) * (cosB * sinC) +
+      (v.y - p.y) * (sinA * sinB * sinC + cosA * cosC) +
+      (v.z - p.z) * (cosA * sinB * sinC - sinA * cosC);
+    const zprime = 
+      (v.x - p.x) * -sinB + 
+      (v.y - p.y) * (sinA * cosB) + 
+      (v.z - p.z) * (cosA * cosB);
+
+    v.x = xprime + p.x
+    v.y = yprime + p.y
+    v.z = zprime + p.z
     return v;
   }
 
@@ -315,18 +306,12 @@ var asciiframe = function () {
     return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
   }
 
-  function distance(A, B=[0,0,0]){
-    if (Array.isArray(A)){
-      return Math.sqrt((A[0]-B[0])**2 + (A[1]-B[1])**2 + (A[2]-B[2])**2);
-    }
-
+  function distanceBetween(A, B){
     return Math.sqrt((A.x-B.x)**2 + (A.y-B.y)**2 + (A.z-B.z)**2);
   }
-
-
 
   pretag.innerHTML = b.join("");
 };
 
-tmr1 = setInterval(asciiframe, framerate);
+tmr1 = setInterval(asciiframe, 50);
 asciiframe();

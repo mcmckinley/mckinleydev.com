@@ -1,74 +1,8 @@
 html, body {
     width: 100%;
-    height: 500vh;
+    height: 200vh;
     margin: 0;
 }
-
-
-/* HEADER */
-
-
-header {
-    width: 100%;
-
-    position: fixed;
-    z-index: 2;
-
-    background-color: #111;
-    
-    font-family: "Rubik", sans-serif;
-
-    color: #fff;
-}
-
-header div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-header div h1 {
-    font-size: 18px;
-}
-
-header div h1, h2 {
-    padding: 0 20px;
-    text-align: center;
-}
-
-/* Shrink header to fit on on small screen */
-@media (max-width: 561px) {
-    header {
-        height: 45px;
-    }
-    header div h2 {
-        font-size: 18px;
-    }
-}
-/* More header shrinking */
-@media (max-width:411px) {
-    header div h2 {
-        font-size: 16px;
-    }
-}
-/* Screen too small: hide other components on header and center mckinleydev text */
-@media (max-width:358px) {
-    header div h2{
-        display: none;    
-    }
-    header div h1 {
-        font-size: 24px;
-    }
-    header div {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-
-/* BACKGROUND */
-
 
 /* div containing all fixed elements of background */
 .fixed-background {
@@ -87,7 +21,7 @@ header div h1, h2 {
     /* background-color: #202020; */
     background-color: #222;
 
-    color: white; 
+    color: #ccc; 
     /* font-size: 12px; */
     font-size: 8px;
     width: 100%;
@@ -100,15 +34,8 @@ header div h1, h2 {
     transform: translate(-50%, -50%);
 }
 
-
-/* SECTIONS */
-/* Each contains 2 divs. Both divs lay side by side, taking up half the width.
-the div on the right contains information, and the div on the left is empty, 
-letting you see through to the background. */
-
-
 .sec {
-    width: 100vw;
+    width: 50vw;
     height: 100vh;
 
     display: flex;
@@ -120,150 +47,54 @@ letting you see through to the background. */
     padding-left: 3%;
 }
 
+@media (min-width: 480px) {
+    h1 {
+        font-size: 50px;
+    }
+    p {
+        font-size: 24px;
+    }
+    .social-image {
+        height: 60px;   
+    }
+}
+
+@media (max-width: 480px) {
+   h1 {
+        font-size: 28px;
+    }
+    p {
+        font-size: 14px;
+    }
+    .social-image {
+        height: 40px;   
+    }
+    .sec {
+        width: 80vw
+    }
+}
+
+
 .social-row img {
     filter: invert(1);
+    size: 50px;
 }
 
-.title {
-    width: 40%;
-    height: 80%;
-    margin: 10% 5%;
-
-    background-color: #444;
-    border-radius: 3px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+a:link {
+  color: white;
 }
 
-.title h1 {
-    opacity: 1;
-    padding: 5px 10px;
-    font-size: clamp(3px, 5vw, 60px);
+/* visited link */
+a:visited {
+  color: white;
 }
 
-.title p {
-    font-size: clamp(3px, 3vw, 20px);
-    padding: 5px 10px;
-    margin: 5px 0;
-    
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    
-    text-overflow: ellipses;
+/* mouse over link */
+a:hover {
+  color: #bbf;
 }
 
-.digits-quiz {
-    width: 50%;
-    height: 100%;
-    background-color: #333;
-    border-radius: 3px;
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* selected link */
+a:active {
+  color: #bbf;
 }
-
-.digits-quiz h1 {
-    font-size: 40px;
-    padding: 5px 10px;;
-}
-
-.digits-quiz p {
-    font-size: clamp(4px, 3vw, 24px);
-    padding: 5px 10px;
-    margin: 5px 0;
-    
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    
-    text-overflow: ellipses;
-}
-
-.digits-quiz a {
-    font-size: clamp(4px, 3vw, 24px);
-    padding: 5px 10px;
-    margin: 5px 0;
-    
-    max-width: 100%;
-    max-height: 100%;
-    overflow: hidden;
-    
-    text-overflow: ellipses;
-    text-decoration: underline;
-}
-.digits-quiz a:link {
-    color: #3399FF;
-}
-.digits-quiz a:visited {
-    color: #3399FF;
-}
-.digits-quiz a:hover {
-    color: #0080FF;
-}
-.digits-quiz a:active {
-    color: lightblue;
-}
-
-.aboutme-section {
-    width: 100vw;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: "Rubik", sans-serif;
-    color: #fff;
-}
-
-.aboutme-left-side {
-    width: 46%;
-    height: 90%;
-    margin: 5% 2%;
-
-    padding: 2%;
-    
-    background-color: #444;
-    border-radius: 4px;
-
-}
-
-.aboutme-left-side h1 {
-    font-size: 40px;
-}
-
-.aboutme-left-side p {
-    font-size: clamp(3px, 3vw, 20px);
-
-}
-
-
-
-
-
-
-
-
-
-
-.window-on-right {
-    width: 50%;
-    height: 90%;
-    background-color: #fff;
-    opacity: 0;
-    border-radius: 3px;
-    font-size: clamp(3px, 3vw, 20px);
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.social {
-    display: flex;
-    flex-direction: row;
-}
-
-

@@ -18,17 +18,7 @@ var planets = [
     vx: 0,
     vy: 0,
     vz: 0
-  },
-  // {
-  //   x: 10,
-  //   y: 0,
-  //   z: 0,
-  //   r: 2,
-  //   m: 2,
-  //   vx: 0,
-  //   vy: 0,
-  //   vz: 0.1
-  // },
+  }
 ]
 
 var count = 0
@@ -46,23 +36,32 @@ C = 0
 
 var vSpaces = Math.floor(window.innerHeight / 8); 
 
+var previousScroll = 0;
+
 var asciiframe = function () {
-  A += 0.0003
-  B += 0.0003
+  A += 0.0006
+  B += 0.0006
   C += 0.000
 
 
-  var lightSources = [
-    // [0, 0, 0], // origin
-    [0 , - scrollTop / 42 + 10, 20] // tracks how much the user has scrolled
-  ]
+  // var lightSources = [
+  //   // [0, 0, 0], // origin
+  //   [0 , - scrollTop / 42 + 10, 20] // tracks how much the user has scrolled
+  // ]
 
 
   function getScrollTop() {
     return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
 
-  planets[0].y = getScrollTop() / 1000
+  var currentScroll = getScrollTop();
+
+  var scrollDiff = currentScroll - previousScroll
+  C = scrollDiff / 50000 ;
+
+  planets[0].y = currentScroll / 1000
+
+
 
   var b = [];
 
@@ -83,44 +82,44 @@ var asciiframe = function () {
 
   // renderCube(r);
 
-  function renderCube(r) {
-    // Normal vectors for each face of the cube
-    var normals = [
-      [0, 1, 0],
-      [0, -1, 0],
-      [1, 0, 0],
-      [-1, 0, 0],
-      [0, 0, 1],
-      [0, 0, -1],
-    ];
+  // function renderCube(r) {
+  //   // Normal vectors for each face of the cube
+  //   var normals = [
+  //     [0, 1, 0],
+  //     [0, -1, 0],
+  //     [1, 0, 0],
+  //     [-1, 0, 0],
+  //     [0, 0, 1],
+  //     [0, 0, -1],
+  //   ];
 
-    // Rotate each normal vector
-    for (var i = 0; i < 6; i++) {
-      normals[i] = rotate(normals[i], r);
-    }
+  //   // Rotate each normal vector
+  //   for (var i = 0; i < 6; i++) {
+  //     normals[i] = rotate(normals[i], r);
+  //   }
 
-    // For every point on one face of the cube, render that
-    // point on each face.
-    for (var i = -side; i < side; i += 0.2) {
-      for (var j = -side; j < side; j += 0.2) {
-        var points = [
-          [i, side, j],
-          [i, -side, j],
-          [side, i, j],
-          [-side, i, j],
-          [i, j, side],
-          [i, j, -side],
-        ];
+  //   // For every point on one face of the cube, render that
+  //   // point on each face.
+  //   for (var i = -side; i < side; i += 0.2) {
+  //     for (var j = -side; j < side; j += 0.2) {
+  //       var points = [
+  //         [i, side, j],
+  //         [i, -side, j],
+  //         [side, i, j],
+  //         [-side, i, j],
+  //         [i, j, side],
+  //         [i, j, -side],
+  //       ];
 
-        for (const direction in points) {
-          renderPoint(
-            rotate(points[direction], r), // The rotated point
-            normals[direction], // Its normal vector
-          );
-        }
-      }
-    }
-  }
+  //       for (const direction in points) {
+  //         renderPoint(
+  //           rotate(points[direction], r), // The rotated point
+  //           normals[direction], // Its normal vector
+  //         );
+  //       }
+  //     }
+  //   }
+  // }
 
 
   const renderDistance = 23
@@ -165,35 +164,35 @@ var asciiframe = function () {
     }
   }
 
-  function updatePlanetPositions(){
-    for (const planet in planets){
-      for (const otherPlanet in planets){
-          if (planet != otherPlanet){
-              const r = distance(planets[planet], planets[otherPlanet]);
-              const G = 0.0005;
+  // function updatePlanetPositions(){
+  //   for (const planet in planets){
+  //     for (const otherPlanet in planets){
+  //         if (planet != otherPlanet){
+  //             const r = distance(planets[planet], planets[otherPlanet]);
+  //             const G = 0.0005;
 
-              const netAcceleration = G * planets[otherPlanet].m / r
+  //             const netAcceleration = G * planets[otherPlanet].m / r
 
-              const i = (planets[otherPlanet].x - planets[planet].x) / r
-              const j = (planets[otherPlanet].y - planets[planet].y) / r
-              const k = (planets[otherPlanet].z - planets[planet].z) / r
+  //             const i = (planets[otherPlanet].x - planets[planet].x) / r
+  //             const j = (planets[otherPlanet].y - planets[planet].y) / r
+  //             const k = (planets[otherPlanet].z - planets[planet].z) / r
 
-              planets[planet].vx += netAcceleration * i
-              planets[planet].vy += netAcceleration * j
-              planets[planet].vz += netAcceleration * k
-          }
-      }
-    }
+  //             planets[planet].vx += netAcceleration * i
+  //             planets[planet].vy += netAcceleration * j
+  //             planets[planet].vz += netAcceleration * k
+  //         }
+  //     }
+  //   }
 
-    for (const planet in planets){
-      planets[planet].x += planets[planet].vx;
-      planets[planet].y += planets[planet].vy;
-      planets[planet].z += planets[planet].vz;
-    }
-  }
+  //   for (const planet in planets){
+  //     planets[planet].x += planets[planet].vx;
+  //     planets[planet].y += planets[planet].vy;
+  //     planets[planet].z += planets[planet].vz;
+  //   }
+  // }
 
-  // For gravity:
-  updatePlanetPositions()
+  // // For gravity:
+  // updatePlanetPositions()
   for (var i = 0; i < planets.length; i++){
     renderSphere(planets[i])
   }
@@ -255,29 +254,29 @@ var asciiframe = function () {
     }
   }
 
-  function rotate(v, r) {
-    const sinA = Math.sin(r[0]),
-      cosA = Math.cos(r[0]),
-      sinB = Math.sin(r[1]),
-      cosB = Math.cos(r[1]),
-      sinC = Math.sin(r[2]),
-      cosC = Math.cos(r[2]);
+  // function rotate(v, r) {
+  //   const sinA = Math.sin(r[0]),
+  //     cosA = Math.cos(r[0]),
+  //     sinB = Math.sin(r[1]),
+  //     cosB = Math.cos(r[1]),
+  //     sinC = Math.sin(r[2]),
+  //     cosC = Math.cos(r[2]);
 
-    const xprime =
-      v[0] * (cosB * cosC) +
-      v[1] * (sinA * sinB * cosC - cosA * sinC) +
-      v[2] * (cosA * sinB * cosC + sinA * sinC);
-    const yprime =
-      v[0] * (cosB * sinC) +
-      v[1] * (sinA * sinB * sinC + cosA * cosC) +
-      v[2] * (cosA * sinB * sinC - sinA * cosC);
-    const zprime = 
-      v[0] * -sinB + 
-      v[1] * (sinA * cosB) + 
-      v[2] * (cosA * cosB);
+  //   const xprime =
+  //     v[0] * (cosB * cosC) +
+  //     v[1] * (sinA * sinB * cosC - cosA * sinC) +
+  //     v[2] * (cosA * sinB * cosC + sinA * sinC);
+  //   const yprime =
+  //     v[0] * (cosB * sinC) +
+  //     v[1] * (sinA * sinB * sinC + cosA * cosC) +
+  //     v[2] * (cosA * sinB * sinC - sinA * cosC);
+  //   const zprime = 
+  //     v[0] * -sinB + 
+  //     v[1] * (sinA * cosB) + 
+  //     v[2] * (cosA * cosB);
 
-    return [xprime, yprime, zprime];
-  }
+  //   return [xprime, yprime, zprime];
+  // }
 
   function rotateAboutPoint(v, r, p) {
     const sinA = Math.sin(r[0]),
@@ -306,14 +305,14 @@ var asciiframe = function () {
     return v;
   }
 
-  function normalize(v) {
-    const mag = Math.sqrt(v[0] ** 2 + v[1] ** 2 + v[2] ** 2);
-    return [v[0] / mag, v[1] / mag, v[2] / mag, mag];
-  }
+  // function normalize(v) {
+  //   const mag = Math.sqrt(v[0] ** 2 + v[1] ** 2 + v[2] ** 2);
+  //   return [v[0] / mag, v[1] / mag, v[2] / mag, mag];
+  // }
 
-  function dot(a, b) {
-    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-  }
+  // function dot(a, b) {
+  //   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  // }
 
   function distance(A, B=[0,0,0]){
     if (Array.isArray(A)){
@@ -322,8 +321,6 @@ var asciiframe = function () {
 
     return Math.sqrt((A.x-B.x)**2 + (A.y-B.y)**2 + (A.z-B.z)**2);
   }
-
-
 
   pretag.innerHTML = b.join("");
 };

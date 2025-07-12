@@ -1,33 +1,40 @@
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color:#222;
+        --text-color:#fff;
+        --ascii-art-color: #888;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --bg-color:#fff;
+        --text-color:#222;
+        --ascii-art-color: #222;
+    }
+}
+
 html, body {
     width: 100%;
     height: 200vh;
     margin: 0;
+    background-color: var(--bg-color);
 }
 
-/* div containing all fixed elements of background */
 .fixed-background {
     position: fixed;
-    z-index: -1;
-    background-color: #222;
-    color: white;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
     display: flex;
     align-items: center;
+    z-index: 0;
 }
 
-/* the pre element, which contains the ascii art */
 .fixed-background pre {
-    /* background-color: #202020; */
-    background-color: #222;
-
-    color: #ccc; 
-    /* font-size: 12px; */
+    color: var(--ascii-art-color);
     font-size: 8px;
     width: 100%;
     max-height: 100%;
-
-    margin-top: 0px;
+    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -35,17 +42,19 @@ html, body {
 }
 
 .sec {
+    position: relative;
+    z-index: 10;
     width: 50vw;
     height: 100vh;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     font-family: "Rubik", sans-serif;
-    color: #fff;
+    color: var(--text-color);
     padding-left: 3%;
 }
+
 
 @media (min-width: 480px) {
     h1 {
@@ -75,26 +84,31 @@ html, body {
 }
 
 
-.social-row img {
-    filter: invert(1);
-    size: 50px;
+/* little trick to change the color of the images from black to white */
+@media (prefers-color-scheme: dark) {
+    .social-row img {
+        filter: invert(1);
+    }
 }
+
 
 a:link {
-  color: white;
+    color: var(--text-color);
 }
-
-/* visited link */
 a:visited {
-  color: white;
+    color: var(--text-color);
 }
-
-/* mouse over link */
 a:hover {
-  color: #bbf;
+    color: #bbf;
+}
+a:active {
+    color: #bbf;
 }
 
-/* selected link */
-a:active {
-  color: #bbf;
+/* 
+for some reason, there's a little square that pops up when an 
+<a> tag has no text. so, we turn it invisible
+*/
+.social-row a {
+    color: var(--bg-color);
 }

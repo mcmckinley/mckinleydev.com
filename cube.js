@@ -1,3 +1,5 @@
+const doLuminance = false;
+
 var pretag = document.getElementById("ascii-art");
 
 var r = [0.03, 0.05, 0.02];
@@ -250,7 +252,10 @@ var asciiframe = function () {
 
     if (depth > zBuffer[intersect]) {
       zBuffer[intersect] = depth;
-      b[intersect] = " .,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
+      if (doLuminance)
+        b[intersect] = " @,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
+      else 
+        b[intersect] = "@"
     }
   }
 

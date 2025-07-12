@@ -4,184 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Michael McKinley</title>
-    <link rel="icon" href="cube.png" type="image/png">
+    <link rel="icon" href="vagabond.png" type="image/png">
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<header>
-    <div>
-        <h1 onclick="scrollToSection('top-section')">mckinleydev</h1>
-        <h2 onclick="scrollToSection('project-section')">Projects</h2>
-        <h2 onclick="scrollToSection('aboutme-section')">About me</h2>
-    </div>
-</header>
+<div class="fixed-background">
+    <pre id="ascii-art" class="fixed-ascii-display">HELLO!!!</pre>
+</div>
 
-<div class="art-page">
+<div class="sec">
+    <h1 style="margin: 0">Michael McKinley</h1>
+    <p style="margin: 15px 0 0 0;">cybersecurity student</p>
+    <p style="margin: 15px 0 15px 0;">ncl team game champion</p>
+
+    <div class="social-row">
+        <a href="https://github.com/mcmckinley" target="_blank" rel="noopener">
+            <img src="assets/github.svg" alt="GitHub" class="social-image">
+        </a>
+        <a href="https://open.spotify.com/artist/4OqQWgNWGAZI55LECmJA5B" target="_blank" rel="noopener">
+            <img src="assets/spotify.svg" alt="Spotify" class="social-image">
+        </a>
+        <a href="https://www.linkedin.com/in/mxmckinley/" target="_blank" rel="noopener">
+            <img src="assets/linkedin.svg" alt="LinkedIn" class="social-image">
+        </a>
+    </div>
+</div>
+
+
+
+<div class="sec">
+    <p><em>my rankings in the</em></p>
+
+    <h1 style="margin: 0">
+        National Cyber League
+    </h1>
+    <p><em>where I have competed in challenges across 9 disciplines within the field of cybersecurity. </em></p>
+
+    <div class="seperator"></div>
     
-    <pre id="ascii-art" class="art">
-    Error in displaying
-    </pre>
+    <div class = "competition-row">
+        <p><em>Spring 2025 Team Game</em></p>
+        <h2>First Place (out of 4779 teams)</h2>
+    </div>
+    <div class = "competition-row">
+        <p><em>Spring 2025 Individual Game</em></p>
+        <h2>98th Percentile (203rd / 8575)</h2>
+    </div>
 
-    <pre id="overlay" class="overlay">
-        Michael McKinley
-
-Check out my projects down below
-    </pre>
-
+    <a href="https://cyberskyline.com/report/M4083EMNMN71">see my rankings on the official NCL website</a>
 </div>
 
 
-<section id="top-section">
-<div class="empty-space"></div>
-</section>
-
-<section id="project-section">
-<div class="project-page">
-    <div class="project">
-        <div class="upper">
-            <div class="info">
-                <h2 id="project-title" class="project-title">Gravitation</h2>
-                <p id="date-created" class="date-created">Date Created: 03/15/23</p>
-                <p id="project-information" class="project-information">Javascript</p>
-            </div>
-            <div class="minidisplay">
-                <pre id="gravity-display" class="gravity-display"></pre>
-            </div>
-        </div>
-        <div class="project-description">
-            <h2 id="description-header" class="description-header">Description</h2>
-            <h2 id="project-title" class="project-title-mobile">Gravitation</h2>
-            <p id="date-created" class="date-created-mobile">Date Created: 03/15/23</p>
-            <p id="project-information" class="project-information-mobile">Javascript</p>
-            <p>A two-dimensional simulation of movement between celestial bodies.</p>
-            <h3><a href="https://studio.code.org/projects/applab/jFBWh8-Qnq2_7ngrHLnvbHVSTI1GaH6WU9XRtqT92Rs">Link to project</a></h3>
-
-        </div>
-    </div>
-    <div class="project">
-        <div class="upper">
-            <div class="info">
-                <h2 id="project-title" class="project-title">3D Rendering</h2>
-                <p id="date-created" class="date-created">Date Created: 11/28/23</p>
-                <p id="project-information" class="project-information">Javascript</p>
-            </div>
-            <div class="minidisplay">
-                <pre id="3drendering-display" class="rendering-display"></pre>
-            </div>
-        </div>
-        <div class="project-description">
-            <h2 id="description-header" class="description-header">Description</h2>
-            <h2 id="project-title" class="project-title-mobile">3D Rendering</h2>
-            <p id="date-created" class="date-created-mobile">Date Created: 11/28/23</p>
-            <p id="project-information" class="project-information-mobile">Javascript</p>
-            <p>Projection of a three-dimensional object to a display using vector operations.</p>
-            <h3><a href="https://studio.code.org/projects/applab/1sWe9KM7UNKW2L3IQDDv1P3MvH6dj10t4kdnSRAc6Js">Link to project</a></h3>
-
-        </div>
-    </div>
-    <div class="project">
-        <div class="upper">
-            <div class="info">
-                <h2 id="project-title" class="project-title">Sudoku Solver</h2>
-                <p id="date-created" class="date-created">Date Created: 10/05/23</p>
-                <p id="project-information" class="project-information">Javascript, C++</p>
-            </div>
-            <div class="minidisplay">
-                <pre id="sudoku-display" class="sudoku-display"></pre>
-                <pre id="unsolved-sudoku-display" class="sudoku-display unsolved">HELLO!</pre>
-            </div>
-        </div>
-        <div class="project-description">
-            <h2 id="description-header" class="description-header">Description</h2>
-            <h2 id="project-title" class="project-title-mobile">Sudoku Solver</h2>
-            <p id="date-created" class="date-created-mobile">Date Created: 10/05/23</p>
-            <p id="project-information" class="project-information-mobile">Javascript, C++</p>
-            <p>Fast and efficient algorithm that solves sudokus by brute force.</p>
-            <h3><a href="https://github.com/mcmckinley/SudokuSolver.git">Link to repository</a></h3>
-        </div>
-    </div>
-    <div class="project">
-        <div class="upper">
-            <div class="info">
-                <h2 id="project-title" class="project-title">Digits Quiz</h2>
-                <p id="date-created" class="date-created">Date Created: 1/24</p>
-                <p id="project-information" class="project-information">Swift</p>
-            </div>
-            <div class="minidisplay digits">
-                <div class="feedback">
-                    <p>(</p>
-                    <p id="feedback0">X</p>
-                    <p id="feedback1">X</p>
-                    <p id="feedback2">X</p>
-                    <p>)</p>
-                    <p id="feedback3">X</p>
-                    <p id="feedback4">X</p>
-                    <p id="feedback5">X</p>
-                    <p>-</p>
-                    <p id="feedback6">X</p>
-                    <p id="feedback7">X</p>
-                    <p id="feedback8">X</p>
-                    <p id="feedback9">X</p>
-                </div>
-                <div class="user-entry">
-                    <p>(</p>
-                    <p id="user-entry0">X</p>
-                    <p id="user-entry1">X</p>
-                    <p id="user-entry2">X</p>
-                    <p>)</p>
-                    <p id="user-entry3">X</p>
-                    <p id="user-entry4">X</p>
-                    <p id="user-entry5">X</p>
-                    <p>-</p>
-                    <p id="user-entry6">X</p>
-                    <p id="user-entry7">X</p>
-                    <p id="user-entry8">X</p>
-                    <p id="user-entry9">X</p>
-                </div>
-            </div>
-        </div>
-        <div class="project-description">
-            <h2 id="description-header" class="description-header">Description</h2>
-            <h2 id="project-title" class="project-title-mobile">Digits Quiz</h2>
-            <p id="date-created" class="date-created-mobile">Date Created: 1/24</p>
-            <p id="project-information" class="project-information-mobile">Swift</p>
-            <p>iOS app that tests the user's knowledge of their contact's phone numbers. Available on the App Store soon...</p>
-            <h3><a href="https://mckinleydev.com/digits-quiz">Website</a></h3>
-        </div>
-    </div>
-</div>
-</section>
-
-<section id="aboutme-section">
-<div class="aboutme">
-    <div class="description">
-        <h1>About Me</h1>
-        <p>I am a Computer Science major at Chico State. I’ve been passionate about programming ever since I discovered it my senior year and began learning it (mostly) on my own. I am interested in a variety of Computer Science topics, and am yet to see where my curiosity takes me.</p>
-        <p>Aside from programming, I love music production. My style ranges from high-energy rhythmic beats to calming lofi tunes. You can find my music here.</p>
-        <p>Reach out to me if you are interested in collaborating.</p>
-        
-
-    </div>
-    <div class="socials">
-        <p>Email: mcmckinley@csuchico.edu</p>
-        <p>Github: mcmckinley</p>
-        <p>Instagram: _mmiichael</p>
-        <p>Spotify: aetherscape</p>
-    </div>
-</div>
-</section>
-
-
-<script src="index.js"></script>
 <script src="cube.js"></script>
-<script src="projects-gravitation.js"></script>
-<script src="projects-3Drendering.js"></script>
-<script src="projects-sudoku.js"></script>
-<script src="projects-digitsquiz.js"></script>
-
 <link rel="stylesheet" href="styles.css">
-
 
 </body>
 </html>

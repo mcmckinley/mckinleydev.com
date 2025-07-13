@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- Open the console for some fun stuff -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -58,6 +59,33 @@
     </div>
 
     <a href="https://cyberskyline.com/report/M4083EMNMN71">see my rankings on the official NCL website</a>
+</div>
+
+
+<div class="sec">
+    <p>mess with the circle</p>
+    <div style="display: flex">
+        <input type="range" value="25" oninput="renderDistance = this.value">
+        <p>render distance</p>
+    </div>
+    <div style="display: flex">
+        <input type="range" value="25" oninput="rotationSpeedA = (this.value ** 2)/100000">
+        <p>x speed of rotation</p>
+    </div>
+    <div style="display: flex">
+        <input type="range" value="25" oninput="rotationSpeedB = (this.value ** 2)/100000">
+        <p>y speed of rotation</p>
+    </div>
+    <div style="display: flex">
+        <input type="range" value="25" min="16" max="200" oninput="clearInterval(tmr1); tmr1 = setInterval(asciiframe, this.value);">
+        <p>refresh speed</p>
+    </div>
+
+    <div style="display: flex">
+        <input type="range" min="3" max="20" value="10"  oninput="density = this.value / 100">
+        <p>density</p>
+    </div>
+    
 </div>
 
 

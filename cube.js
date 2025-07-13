@@ -1,4 +1,4 @@
-const doLuminance = false;
+var doLuminance = false;
 
 var pretag = document.getElementById("ascii-art");
 
@@ -30,10 +30,21 @@ if (window.innerWidth < 500) {
   hSpaces += 10;
 }
 
-// ... what is this doing??
 A = 0
 B = 0 
 C = 0
+0.0000
+0.1
+
+
+
+rotationSpeedA = 0.0006
+rotationSpeedB = 0.0006
+rotationSpeedC = 0
+
+var renderDistance = 23
+
+var density = 0.1;
 
 
 var vSpaces = Math.floor(window.innerHeight / 8); 
@@ -41,9 +52,9 @@ var vSpaces = Math.floor(window.innerHeight / 8);
 var previousScroll = 0;
 
 var asciiframe = function () {
-  A += 0.0006
-  B += 0.0006
-  C += 0.000
+  A += rotationSpeedA
+  B += rotationSpeedB
+  C += rotationSpeedC
 
 
   // var lightSources = [
@@ -124,18 +135,17 @@ var asciiframe = function () {
   // }
 
 
-  const renderDistance = 23
 
 
   function renderSphere(sphere) {
     // render a tropic/equator
-    for (var i = 0; i < 3.14 * 2; i += 0.1) {
+    for (var i = 0; i < 3.14 * 2; i += density) {
 
 
       // var density = ((i) * (i - 6.2) / 9.2) + 1;
       // if (density < 0.01) density = 0.01;
 
-      var density = 0.1;
+      
 
       for (var k = -1.57; k < 1.57; k += density) {
         const x = Math.cos(k) * Math.cos(i);
@@ -224,6 +234,7 @@ var asciiframe = function () {
 
     const intersect = screenx + hSpaces * screeny;
 
+    // Luminance when there are multiple light sources
     // var luminance = 0
     // for (var i = 0; i < lightSources.length; i++){
     //   const lightSource = lightSources[i]
@@ -237,25 +248,27 @@ var asciiframe = function () {
     // }
     // if (luminance > 11)
     //   luminance = 11
-    
-    luminance = 1
 
-    // const lightvec = normalize([
-    //   planets[0].x - point[0],
-    //   planets[0].y - point[1],
-    //   planets[0].z - point[2],
-    // ]);
-    // const strength = 2.7 ** (-0.02 * lightvec[3]);
-    // const luminance = 0 | (strength * 11 * dot(lightvec, normal));
+
+    
 
     var depth = 1 / (50 - point[2]);
 
     if (depth > zBuffer[intersect]) {
       zBuffer[intersect] = depth;
-      if (doLuminance)
-        b[intersect] = " @,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
-      else 
+      if (doLuminance) {
+        // Luminance for a single light source
+        const lightvec = normalize([
+          0 - point[0],
+          0 - point[1],
+          0 - point[2],
+        ]);
+        const strength = 2.7 ** (-0.02 * lightvec[3]);
+        const luminance = 0 | (strength * 11 * dot(lightvec, normal));
+        b[intersect] = "`,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
+      } else {
         b[intersect] = "@"
+      }
     }
   }
 
@@ -310,14 +323,14 @@ var asciiframe = function () {
     return v;
   }
 
-  // function normalize(v) {
-  //   const mag = Math.sqrt(v[0] ** 2 + v[1] ** 2 + v[2] ** 2);
-  //   return [v[0] / mag, v[1] / mag, v[2] / mag, mag];
-  // }
+  function normalize(v) {
+    const mag = Math.sqrt(v[0] ** 2 + v[1] ** 2 + v[2] ** 2);
+    return [v[0] / mag, v[1] / mag, v[2] / mag, mag];
+  }
 
-  // function dot(a, b) {
-  //   return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-  // }
+  function dot(a, b) {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+  }
 
   function distance(A, B=[0,0,0]){
     if (Array.isArray(A)){

@@ -51,6 +51,8 @@ html, body {
     justify-content: center;
     align-items: flex-start;
     font-family: "Rubik", sans-serif;
+    font-family: "Roboto Mono", monospace;
+    /* font-family:'Roboto' */
     color: var(--text-color);
     padding-left: 3%;
 }
@@ -84,7 +86,7 @@ html, body {
 }
 
 
-/* little trick to change the color of the images from black to white */
+/* change the color of the images from black to white */
 @media (prefers-color-scheme: dark) {
     .social-row img {
         filter: invert(1);
@@ -112,3 +114,23 @@ for some reason, there's a little square that pops up when an
 .social-row a {
     color: var(--bg-color);
 }
+
+/* === hero & scramble additions === */
+.sec.hero{
+  align-items:center;
+  text-align:center;
+  padding-left:0;
+  width:min(900px,90vw);
+  margin:0 auto;
+}
+.sec.hero .social-row{
+  display:flex;
+  gap:18px;
+  justify-content:center;
+  margin-top:20px;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(12px);color:#000;}
+  to{opacity:1;transform:translateY(0);color:var(--text-color);}
+}
+.scramble{display:inline-block;will-change:transform,opacity,color;}

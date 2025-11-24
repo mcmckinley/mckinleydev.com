@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- Open the console for some fun stuff -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,32 +9,37 @@
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"> -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
 <div class="fixed-background">
-    <pre id="ascii-art" class="fixed-ascii-display noselect">HELLO!!!</pre>
+    <pre id="ascii-art" class="fixed-ascii-display noselect">error in displaying ascii art/pre>
 </div>
 
 <div class="sec hero">
     <h1 class="scramble" style="margin:0">Michael McKinley</h1>
-    <p class="scramble" style="margin:15px 0 0 0;">cybersecurity student</p>
+    <p class="scramble" style="margin:15px 0 0 0;">computer science / cybersecurity student</p>
     <p class="scramble" style="margin:15px 0 15px 0;">ncl team game champion</p>
 
     <div class="social-row">
         <a href="https://github.com/mcmckinley" target="_blank" rel="noopener">
-            <img src="assets/github.svg" alt="GitHub" class="social-image">
-        </a>
-        <a href="https://open.spotify.com/artist/4OqQWgNWGAZI55LECmJA5B" target="_blank" rel="noopener">
-            <img src="assets/spotify.svg" alt="Spotify" class="social-image">
+            <img src="assets/github.svg" alt="GitHub" class="social-image scramble">
         </a>
         <a href="https://www.linkedin.com/in/mxmckinley/" target="_blank" rel="noopener">
-            <img src="assets/linkedin.svg" alt="LinkedIn" class="social-image">
+            <img src="assets/linkedin.svg" alt="LinkedIn" class="social-image scramble">
+        </a>
+        <a href="https://open.spotify.com/artist/4OqQWgNWGAZI55LECmJA5B" target="_blank" rel="noopener">
+            <img src="assets/spotify.svg" alt="Spotify" class="social-image scramble">
         </a>
     </div>
+    <nav class="primary-actions" aria-label="Main actions">
+        <a class="btn cta scramble" href="#projects" aria-label="Go to projects">Projects</a>
+        <a class="btn cta scramble" href="#writeups" aria-label="Go to writeups">Writeups</a>
+        <a class="btn cta scramble" href="#resume" aria-label="Go to resume">Resume</a>
+    </nav>
 </div>
 
 
@@ -78,7 +82,7 @@
         <p>y speed of rotation</p>
     </div>
     <div style="display: flex">
-        <input type="range" value="25" min="16" max="200" oninput="clearInterval(tmr1); tmr1 = setInterval(asciiframe, this.value);">
+        <input type="range" value="25" min="1" max="60" oninput="clearInterval(tmr1); tmr1 = setInterval(asciiframe, (1/this.value)*1000);">
         <p>refresh speed</p>
     </div>
 

@@ -33,14 +33,12 @@ if (window.innerWidth < 500) {
 A = 0
 B = 0 
 C = 0
-0.0000
-0.1
-
-
 
 rotationSpeedA = 0.0006
 rotationSpeedB = 0.0006
 rotationSpeedC = 0
+
+const scrollMovementFactorOnSphere = 6.0 
 
 var renderDistance = 23
 
@@ -72,7 +70,7 @@ var asciiframe = function () {
   var scrollDiff = currentScroll - previousScroll
   C = scrollDiff / 50000 ;
 
-  planets[0].y = currentScroll / 1000
+  planets[0].y = (currentScroll / 1000) * scrollMovementFactorOnSphere;
 
 
 
@@ -267,7 +265,7 @@ var asciiframe = function () {
         const luminance = 0 | (strength * 11 * dot(lightvec, normal));
         b[intersect] = "`,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
       } else {
-        b[intersect] = "@"
+        b[intersect] = "."
       }
     }
   }

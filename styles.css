@@ -2,7 +2,7 @@
     :root {
         --bg-color:#222;
         --text-color:#fff;
-        --ascii-art-color: #888;
+        --ascii-art-color: #999;
     }
 }
 
@@ -107,7 +107,7 @@ a:active {
 
 /* 
 for some reason, there's a little square that pops up when an 
-<a> tag has no text. so, we turn it invisible
+<a> tag has no text. so, we turn the text invisible
 */
 .social-row a {
     color: var(--bg-color);
@@ -132,3 +132,67 @@ for some reason, there's a little square that pops up when an
   to{opacity:1;transform:translateY(0);color:var(--text-color);}
 }
 .scramble{display:inline-block;will-change:transform,opacity,color;}
+
+/* Prevent flash/jerk before JS runs: only hide when JS has enabled the class */
+.js-enabled .scramble {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+
+/* === primary action buttons === */
+.primary-actions{
+  display:flex;
+  gap:16px;
+  justify-content:center;
+  align-items:center;
+  margin-top:22px;
+  flex-wrap:wrap;
+}
+
+.btn.cta{
+  --btn-bg: rgba(255,255,255,0.08);
+  --btn-border: rgba(255,255,255,0.08);
+  --btn-bg-hover: rgba(255,255,255,0.14);
+  --btn-border-hover: rgba(255,255,255,0.35);
+
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:12px 18px;
+  border-radius:12px;
+  border:1px solid var(--btn-border);
+  background: var(--btn-bg);
+  color: var(--text-color);
+  text-decoration:none;
+  font-weight:600;
+  letter-spacing:0.2px;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+.btn.cta:hover{
+  background: var(--btn-bg-hover);
+  border-color: var(--btn-border-hover);
+  transform: translateY(-1px);
+}
+
+.btn.cta:active{
+  transform: translateY(0);
+}
+
+.btn.cta:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 132, 255, 0.55);
+}
+
+/* respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn.cta{ transition: none; }
+  .btn.cta:hover, .btn.cta:active{ transform:none; }
+}
+
+/* optional: smooth scroll for same-page anchors */
+html { scroll-behavior: smooth; }

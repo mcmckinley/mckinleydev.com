@@ -1,9 +1,14 @@
 // index.js
-// Hero text: fade from black, slide up slightly, then "scramble" to final text.
-// Repeats whenever the element leaves and re-enters the viewport.
+// Fade-up + scramble that replays on re-entry, without initial "jerk".
+// Fixes:
+// 1) Locks width/height during animation to prevent layout shift.
+// 2) Hides .scramble until JS is ready (pair with small CSS rule below).
 
 (function () {
   const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{};:,.<>?/\\|";
+
+  // Enable CSS guard to hide .scramble before JS runs
+  try { document.documentElement.classList.add("js-enabled"); } catch (e) {}
 
   function randomString(len) {
     let out = "";
@@ -11,29 +16,53 @@
     return out;
   }
 
+  // weird AI code that does nothing
+  // function lockBox(el, textForMeasure) {
+  //   // Measure with the final text, then lock width/height to avoid layout shift.
+  //   const prev = el.textContent;
+  //   el.textContent = textForMeasure;
+
+  //   const prevDisplay = el.style.display;
+  //   if (getComputedStyle(el).display === "inline") el.style.display = "inline-block";
+
+  //   const rect = el.getBoundingClientRect();
+  //   el.style.width = rect.width + "px";
+  //   el.style.height = rect.height + "px";
+
+  //   el.textContent = prev;
+  //   return () => {
+  //     el.style.width = "";
+  //     el.style.height = "";
+  //     if (prevDisplay) el.style.display = prevDisplay;
+  //   };
+  // }
+
   function runScramble(el, options = {}) {
     const target = (el.getAttribute("data-text") || el.textContent || "").toString();
     const length = target.length;
 
-    const delay = options.delay || 0;                 // ms before starting
-    const randomPhase = options.randomPhase || 250;   // how long full-random replaces all chars
-    const perChar = options.perChar || 40;            // ms per character to "lock in"
-    const fadeMs = options.fadeMs || 800;             // CSS fade/slide duration
-    const startColorTo = getComputedStyle(document.documentElement).getPropertyValue("--text-color") || "#fff";
+    const delay = options.delay || 0;               // ms before starting
+    const randomPhase = options.randomPhase || 250; // ms of full-random characters
+    const perChar = options.perChar || 40;          // ms per character to lock in
+    const fadeMs = options.fadeMs || 800;           // CSS fade/slide duration
+    const startColorTo =
+      getComputedStyle(document.documentElement).getPropertyValue("--text-color") || "#fff";
 
-    // Prepare the element to re-run the CSS animation cleanly
+    // Lock size until the effect finishes
+    // const unlock = lockBox(el, target);
+
+    // Reset & apply the fadeUp animation cleanly
     el.style.animation = "none";
-    // Force reflow to reset animation state
-    void el.offsetWidth; // eslint-disable-line no-unused-expressions
+    void el.offsetWidth; // force reflow
     el.style.animation = `fadeUp ${fadeMs}ms ease-out both`;
     if (options.stagger) el.style.animationDelay = `${options.stagger}ms`;
     el.style.willChange = "transform, opacity, color";
 
-    // Start from black again
+    // Start from black for the fade
     el.style.color = "#000";
 
-    // Replace content with spaces so layout width stays stable until scramble begins
-    el.textContent = target.replace(/./g, " ");
+    // Show the final text to match the locked size exactly, then scramble
+    el.textContent = target;
 
     const startAt = performance.now() + delay;
     el.dataset.animating = "1";
@@ -64,7 +93,10 @@
         el.textContent = target;
         el.style.color = startColorTo.trim() || "";
         el.dataset.animating = "0";
-        el.dataset.ready = "0"; // not ready to re-run until it leaves the viewport again
+        el.dataset.ready = "0"; // won’t re-run until it leaves the viewport
+
+        // Release size lock now that we’ve settled
+        // unlock();
       }
     }
 
@@ -81,7 +113,6 @@
 
   function onEnter(el) {
     if (el.dataset.animating === "1") return;
-    // Only run if we have been marked as ready (either initial state or after leaving viewport)
     if (el.dataset.ready !== "1") return;
 
     runScramble(el, {
@@ -107,7 +138,6 @@
       const io = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           const el = entry.target;
-          // entry.isIntersecting is enough in most cases, but also check ratio
           if (entry.isIntersecting && entry.intersectionRatio >= threshold) {
             onEnter(el);
           } else if (!entry.isIntersecting || entry.intersectionRatio < 0.01) {

@@ -49,6 +49,13 @@ var vSpaces = Math.floor(window.innerHeight / 8);
 
 var previousScroll = 0;
 
+// used to determine visibility of particles on sphere
+const start = (typeof performance !== "undefined" ? performance.now() : Date.now());
+
+function timeSinceStart() {
+  return typeof performance !== "undefined" ? performance.now() : Date.now();
+}
+
 var asciiframe = function () {
   A += rotationSpeedA
   B += rotationSpeedB
@@ -265,7 +272,14 @@ var asciiframe = function () {
         const luminance = 0 | (strength * 11 * dot(lightvec, normal));
         b[intersect] = "`,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
       } else {
-        b[intersect] = "."
+        var shouldDisplay = true;
+        var time = timeSinceStart();
+        if (time < 2000){
+          if (Math.random() * 2000 > time){
+            shouldDisplay = false;
+          }
+        }
+        b[intersect] = shouldDisplay ? "." : " ";
       }
     }
   }

@@ -106,7 +106,7 @@
   function prepareElement(el, index) {
     const text = (el.getAttribute("data-text") || el.textContent || "").toString();
     el.setAttribute("data-text", text);
-    el.dataset.stagger = String(index * 120);
+    el.dataset.stagger = String(index * 60);
     el.dataset.animating = "0";
     el.dataset.ready = "1"; // ready to run initially
   }
@@ -116,7 +116,7 @@
     if (el.dataset.ready !== "1") return;
 
     runScramble(el, {
-      delay: 200 + Number(el.dataset.stagger || 0),
+      delay: 0 + Number(el.dataset.stagger || 0),
       stagger: Number(el.dataset.stagger || 0),
       randomPhase: 250,
       perChar: 40,

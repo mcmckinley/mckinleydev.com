@@ -106,7 +106,8 @@
   function prepareElement(el, index) {
     const text = (el.getAttribute("data-text") || el.textContent || "").toString();
     el.setAttribute("data-text", text);
-    el.dataset.stagger = String(index * 60);
+    // el.dataset.stagger = String(index * 60); // staggers in order
+    el.dataset.stagger = String(Math.random() * 300); // staggers at random
     el.dataset.animating = "0";
     el.dataset.ready = "1"; // ready to run initially
   }

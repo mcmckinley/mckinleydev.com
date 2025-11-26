@@ -52,7 +52,7 @@ const scrollMovementFactorOnSphere = 6.0
 
 var renderDistance = 23
 
-var density = 0.1;
+var density = 0.05;
 
 
 var vSpaces = Math.floor(window.innerHeight / 8); 

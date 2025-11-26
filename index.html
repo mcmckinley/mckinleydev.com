@@ -19,134 +19,164 @@
     <pre id="ascii-art" class="fixed-ascii-display noselect">error in displaying ascii art/pre>
 </div>
 
-<div class="sec hero">
-    <h1 class="scramble" style="margin:0">Michael McKinley</h1>
-    <p class="scramble" style="margin:15px 0 0 0;">computer science / cybersecurity student</p>
-    <p class="scramble" style="margin:15px 0 15px 0;">ncl team game champion</p>
-
-    <div class="social-row">
-        <a href="https://github.com/mcmckinley" target="_blank" rel="noopener">
-            <img src="assets/github.svg" alt="GitHub" class="social-image scramble">
-        </a>
-        <a href="https://www.linkedin.com/in/mxmckinley/" target="_blank" rel="noopener">
-            <img src="assets/linkedin.svg" alt="LinkedIn" class="social-image scramble">
-        </a>
-        <a href="https://open.spotify.com/artist/4OqQWgNWGAZI55LECmJA5B" target="_blank" rel="noopener">
-            <img src="assets/spotify.svg" alt="Spotify" class="social-image scramble">
-        </a>
-    </div>
-    <nav class="primary-actions">
-        <a class="btn cta scramble" href="#volunteering">Volunteering</a>
-        <a class="btn cta scramble" href="#clubs">Clubs</a>
-        <a class="btn cta scramble" href="#projects">Projects</a>
-        <a class="btn cta scramble" href="#writeups">CTFs & Writeups ⤴</a>
-        <a class="btn cta scramble" href="#resume">Resume ⤴</a>
-    </nav>
-</div>
-
-<section id="volunteering" class="sec sec-page">
-  <div class="sec-page-inner">
-    <div class="sec-page-text">
-      <!-- title + arrows + index -->
-      <div class="carousel-header">
-        <h1>Volunteering</h1>
-        <div class="carousel-controls" data-carousel-controls>
-          <button class="carousel-arrow" data-dir="prev"><h1>←</h1></button>
-        <!-- <button class="btn cta scramble" data-dir="prev"><h1>←</h1></button> -->
-          <h1>
-              <span class="carousel-counter">
-                <span data-current>1</span>/<span data-total>2</span>
-              </span>
-          </h1>
-          <button class="carousel-arrow" data-dir="next"><h1>→</h1></button>
+<div class="layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-title">
+            <span class="sidebar-name scramble">Michael McKinley</span>
+            <span class="sidebar-subtitle scramble">security</span>
+            <span class="sidebar-subtitle scramble">reverse engineering</span>
+            <span class="sidebar-subtitle scramble">embedded</span>
+            <span class="sidebar-subtitle scramble">C</span>
         </div>
-      </div>
 
-      <!-- the actual carousel -->
-      <div class="carousel" data-carousel>
-        <div class="carousel-track">
-          <!-- Slide 1 -->
-          <article
-            class="carousel-item is-active"
-            data-bg="images/ultracold.jpg--"
-          >
-            <h2>App Developer</h2>
-            <h3>Chico State Department of Physics</h3>
-            <p>
-              Short description of what you did at the Physics Department.
-            </p>
-          </article>
+        <nav class="sidebar-nav">
+            <a href="/"              class="nav-link">Home</a>
+            <a href="/volunteering/" class="nav-link">Volunteer Work</a>
+            <a href="/writeups/"     class="nav-link">Writeups</a>
+            <a href="/projects/"     class="nav-link">Projects</a>
+        </nav>
+        <nav class="sidebar-nav">
+            <a href="/"              class="nav-link">LinkedIn</a>
+            <a href="/" class="nav-link">GitHub</a>
+            <a href="/resume/"       class="nav-link">Resume</a>
+        </nav>
+    </aside>
 
-          <!-- Slide 2 -->
-          <article
-            class="carousel-item"
-            data-bg="images/netz-ak.png---"
-          >
-            <h2>Network helper</h2>
-            <p>
-              Short description of your “Network helper” volunteering.
-            </p>
-          </article>
+    <!-- MAIN CONTENT AREA -->
+    <main class="content">
+
+    <div class="sec hero">
+        <h1 class="scramble" style="margin:0">Michael McKinley</h1>
+        <p class="scramble" style="margin:15px 0 0 0;">computer science / cybersecurity student</p>
+        <p class="scramble" style="margin:15px 0 15px 0;">ncl team game champion</p>
+
+        <div class="social-row">
+            <a href="https://github.com/mcmckinley" target="_blank" rel="noopener">
+                <img src="assets/github.svg" alt="GitHub" class="social-image scramble">
+            </a>
+            <a href="https://www.linkedin.com/in/mxmckinley/" target="_blank" rel="noopener">
+                <img src="assets/linkedin.svg" alt="LinkedIn" class="social-image scramble">
+            </a>
+            <a href="https://open.spotify.com/artist/4OqQWgNWGAZI55LECmJA5B" target="_blank" rel="noopener">
+                <img src="assets/spotify.svg" alt="Spotify" class="social-image scramble">
+            </a>
         </div>
-      </div>
+        <nav class="primary-actions">
+            <a class="btn cta scramble" href="#volunteering">Volunteering</a>
+            <a class="btn cta scramble" href="#clubs">Clubs</a>
+            <a class="btn cta scramble" href="#projects">Projects</a>
+            <a class="btn cta scramble" href="#writeups">CTFs & Writeups ⤴</a>
+            <a class="btn cta scramble" href="#resume">Resume ⤴</a>
+        </nav>
     </div>
 
-    <!-- per-slide background image gets controlled via JS -->
-    <div class="sec-page-image"></div>
-  </div>
-</section>
+    <section id="volunteering" class="sec sec-page">
+    <div class="sec-page-inner">
+        <div class="sec-page-text">
+        <!-- title + arrows + index -->
+        <div class="carousel-header">
+            <h1>Volunteering</h1>
+            <div class="carousel-controls" data-carousel-controls>
+            <button class="carousel-arrow" data-dir="prev"><h1>←</h1></button>
+            <!-- <button class="btn cta scramble" data-dir="prev"><h1>←</h1></button> -->
+            <h1>
+                <span class="carousel-counter">
+                    <span data-current>1</span>/<span data-total>2</span>
+                </span>
+            </h1>
+            <button class="carousel-arrow" data-dir="next"><h1>→</h1></button>
+            </div>
+        </div>
 
+        <!-- the actual carousel -->
+        <div class="carousel" data-carousel>
+            <div class="carousel-track">
+            <!-- Slide 1 -->
+            <article
+                class="carousel-item is-active"
+                data-bg="images/ultracold.jpg--"
+            >
+                <h2>App Developer</h2>
+                <h3>Chico State Department of Physics</h3>
+                <p>
+                Short description of what you did at the Physics Department.
+                </p>
+            </article>
 
+            <!-- Slide 2 -->
+            <article
+                class="carousel-item"
+                data-bg="images/netz-ak.png---"
+            >
+                <h2>Network helper</h2>
+                <p>
+                Short description of your “Network helper” volunteering.
+                </p>
+            </article>
+            </div>
+        </div>
+        </div>
 
-
-<div class="sec">
-    <p><em>my rankings in the</em></p>
-
-    <h1 style="margin: 0">
-        National Cyber League
-    </h1>
-    <p><em>where I have competed in challenges across 9 disciplines within the field of cybersecurity. </em></p>
-
-    <div class="seperator"></div>
-    
-    <div class = "competition-row">
-        <p><em>Spring 2025 Team Game</em></p>
-        <h2>First Place (out of 4779 teams)</h2>
+        <!-- per-slide background image gets controlled via JS -->
+        <div class="sec-page-image"></div>
     </div>
-    <div class = "competition-row">
-        <p><em>Spring 2025 Individual Game</em></p>
-        <h2>98th Percentile (203rd / 8575)</h2>
+    </section>
+
+
+
+
+    <div class="sec">
+        <p><em>my rankings in the</em></p>
+
+        <h1 style="margin: 0">
+            National Cyber League
+        </h1>
+        <p><em>where I have competed in challenges across 9 disciplines within the field of cybersecurity. </em></p>
+
+        <div class="seperator"></div>
+        
+        <div class = "competition-row">
+            <p><em>Spring 2025 Team Game</em></p>
+            <h2>First Place (out of 4779 teams)</h2>
+        </div>
+        <div class = "competition-row">
+            <p><em>Spring 2025 Individual Game</em></p>
+            <h2>98th Percentile (203rd / 8575)</h2>
+        </div>
+
+        <a href="https://cyberskyline.com/report/M4083EMNMN71">see my rankings on the official NCL website</a>
     </div>
 
-    <a href="https://cyberskyline.com/report/M4083EMNMN71">see my rankings on the official NCL website</a>
+
+    <div class="sec">
+        <p>Mess with the sphere. I made this myself with raw javascript</p>
+        <div style="display: flex">
+            <input type="range" value="25" oninput="renderDistance = this.value">
+            <p>render distance</p>
+        </div>
+        <div style="display: flex">
+            <input type="range" value="25" oninput="rotationSpeedA = (this.value ** 2)/100000">
+            <p>x speed of rotation</p>
+        </div>
+        <div style="display: flex">
+            <input type="range" value="25" oninput="rotationSpeedB = (this.value ** 2)/100000">
+            <p>y speed of rotation</p>
+        </div>
+        <div style="display: flex">
+            <input type="range" value="25" min="1" max="60" oninput="clearInterval(tmr1); tmr1 = setInterval(asciiframe, (1/this.value)*1000);">
+            <p>refresh speed</p>
+        </div>
+
+        <div style="display: flex">
+            <input type="range" min="3" max="20" value="10"  oninput="density = this.value / 100">
+            <p>density</p>
+        </div>
+    </div>
+
+    </main>
 </div>
 
-
-<div class="sec">
-    <p>Mess with the sphere. I made this myself with raw javascript</p>
-    <div style="display: flex">
-        <input type="range" value="25" oninput="renderDistance = this.value">
-        <p>render distance</p>
-    </div>
-    <div style="display: flex">
-        <input type="range" value="25" oninput="rotationSpeedA = (this.value ** 2)/100000">
-        <p>x speed of rotation</p>
-    </div>
-    <div style="display: flex">
-        <input type="range" value="25" oninput="rotationSpeedB = (this.value ** 2)/100000">
-        <p>y speed of rotation</p>
-    </div>
-    <div style="display: flex">
-        <input type="range" value="25" min="1" max="60" oninput="clearInterval(tmr1); tmr1 = setInterval(asciiframe, (1/this.value)*1000);">
-        <p>refresh speed</p>
-    </div>
-
-    <div style="display: flex">
-        <input type="range" min="3" max="20" value="10"  oninput="density = this.value / 100">
-        <p>density</p>
-    </div>
-    
-</div>
 
 
 <script src="cube.js"></script>

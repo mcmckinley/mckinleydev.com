@@ -163,3 +163,73 @@
   if (document.readyState !== "loading") init();
   else document.addEventListener("DOMContentLoaded", init);
 })();
+
+// Per-section carousel with image + header controls
+(function () {
+  function initCarousel(root) {
+    const items = Array.from(root.querySelectorAll(".carousel-item"));
+    if (!items.length) return;
+
+    let index = items.findIndex((el) => el.classList.contains("is-active"));
+    if (index === -1) index = 0;
+
+    const total = items.length;
+
+    // right-side image element for this section
+    const imageEl =
+      root.closest(".sec-page-inner")?.querySelector(".sec-page-image") || null;
+
+    // header controls & counter
+    const controls =
+      root.closest(".sec-page-text")?.querySelector("[data-carousel-controls]") ||
+      null;
+
+    const prevBtn = controls?.querySelector('[data-dir="prev"]') || null;
+    const nextBtn = controls?.querySelector('[data-dir="next"]') || null;
+    const currentEl = controls?.querySelector("[data-current]") || null;
+    const totalEl = controls?.querySelector("[data-total]") || null;
+
+    if (totalEl) totalEl.textContent = String(total);
+
+    function setBackgroundFromItem(item) {
+      if (!imageEl) return;
+      const bg = item.dataset.bg;
+      if (!bg) return;
+
+      // allow either "assets/img.jpg" or "url('assets/img.jpg')"
+      const value = bg.trim().startsWith("url(") ? bg : `url('${bg}')`;
+      imageEl.style.setProperty("--sec-bg-url", value);
+    }
+
+    function show(i) {
+      index = (i + items.length) % items.length; // wrap around
+      items.forEach((el, idx) => {
+        el.classList.toggle("is-active", idx === index);
+      });
+
+      const activeItem = items[index];
+      setBackgroundFromItem(activeItem);
+
+      if (currentEl) currentEl.textContent = String(index + 1);
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => show(index - 1));
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => show(index + 1));
+    }
+
+    // init state (image + counter)
+    show(index);
+  }
+
+  function initAllCarousels() {
+    const carousels = document.querySelectorAll("[data-carousel]");
+    carousels.forEach(initCarousel);
+  }
+
+  if (document.readyState !== "loading") initAllCarousels();
+  else document.addEventListener("DOMContentLoaded", initAllCarousels);
+})();

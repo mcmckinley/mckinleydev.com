@@ -9,7 +9,7 @@
     <!-- Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
 </head>
 
@@ -45,24 +45,58 @@
 </div>
 
 <section id="volunteering" class="sec sec-page">
-    <div class="sec-page-inner">
-        <div class="sec-page-text">
-            <p><em>example volunteer page</em></p>
-            <h1>Volunteering</h1>
-            <p>
-                blah blah blah, blah blah blah
-                lorem ipsum
-            </p>
-            <p>
-                blah blah blah, blah blah blah
-                lorem ipsum
-            </p>
+  <div class="sec-page-inner">
+    <div class="sec-page-text">
+      <!-- title + arrows + index -->
+      <div class="carousel-header">
+        <h1>Volunteering</h1>
+        <div class="carousel-controls" data-carousel-controls>
+          <button class="carousel-arrow" data-dir="prev"><h1>←</h1></button>
+        <!-- <button class="btn cta scramble" data-dir="prev"><h1>←</h1></button> -->
+          <h1>
+              <span class="carousel-counter">
+                <span data-current>1</span>/<span data-total>2</span>
+              </span>
+          </h1>
+          <button class="carousel-arrow" data-dir="next"><h1>→</h1></button>
         </div>
+      </div>
 
-        <!-- change the image file here -->
-        <div class="sec-page-image" style="--sec-bg-url: url('images/mmmsh.png');"></div>
+      <!-- the actual carousel -->
+      <div class="carousel" data-carousel>
+        <div class="carousel-track">
+          <!-- Slide 1 -->
+          <article
+            class="carousel-item is-active"
+            data-bg="images/ultracold.jpg--"
+          >
+            <h2>App Developer</h2>
+            <h3>Chico State Department of Physics</h3>
+            <p>
+              Short description of what you did at the Physics Department.
+            </p>
+          </article>
+
+          <!-- Slide 2 -->
+          <article
+            class="carousel-item"
+            data-bg="images/netz-ak.png---"
+          >
+            <h2>Network helper</h2>
+            <p>
+              Short description of your “Network helper” volunteering.
+            </p>
+          </article>
+        </div>
+      </div>
     </div>
+
+    <!-- per-slide background image gets controlled via JS -->
+    <div class="sec-page-image"></div>
+  </div>
 </section>
+
+
 
 
 <div class="sec">
@@ -89,7 +123,7 @@
 
 
 <div class="sec">
-    <p>mess with the circle</p>
+    <p>Mess with the sphere. I made this myself with raw javascript</p>
     <div style="display: flex">
         <input type="range" value="25" oninput="renderDistance = this.value">
         <p>render distance</p>

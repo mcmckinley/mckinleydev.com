@@ -12,10 +12,20 @@ var framerate = 50
 
 var planets = [
   {
-    x: 20, // SUN
+    x: -20, // SUN
     y: 3,
     z: -20,
     r: 25,
+    m: 10,
+    vx: 0,
+    vy: 0,
+    vz: 0
+  },
+  {
+    x: 20, // SUN
+    y: 3,
+    z: -10,
+    r: 10,
     m: 10,
     vx: 0,
     vy: 0,
@@ -77,7 +87,9 @@ var asciiframe = function () {
   var scrollDiff = currentScroll - previousScroll
   C = scrollDiff / 50000 ;
 
-  planets[0].y = (currentScroll / 1000) * scrollMovementFactorOnSphere;
+  for (planet of planets) {
+    planet.y = (currentScroll / 1000) * scrollMovementFactorOnSphere;
+  }
 
 
 

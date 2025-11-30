@@ -8,6 +8,9 @@
         --ascii-art-color: #999;
         --box-shadow-color: rgba(255,0,0,0.35);
         --box-shadow-hover-color: rgba(0,255,0,0.15);
+
+        --accent-color-1: rgba(255,0,0,0.15);
+        --accent-color-2: rgba(0,255,0,0.15);
     }
 }
 
@@ -21,6 +24,9 @@
         --ascii-art-color: #222;
         --box-shadow-color: rgba(0,0,0,0.15);
         --box-shadow-hover-color: rgba(0,255,0,0.15);
+
+        --accent-color-1: rgba(255,0,0,0.15);
+        --accent-color-2: rgba(0,255,0,0.15);
     }
 }
 
@@ -52,6 +58,13 @@ html, body {
     left: 50%;
     transform: translate(-50%, -50%);
     animation: fadein 2s;
+}
+
+.noselect {
+    -webkit-user-select: none; /* Safari */        
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
 }
 
 @keyframes fadein {
@@ -87,7 +100,7 @@ html, body {
 }
 
 @media (max-width: 480px) {
-   h1 {
+    h1 {
         font-size: 28px;
     }
     p {
@@ -233,8 +246,7 @@ html { scroll-behavior: smooth; }
     display: flex;
     align-items: stretch;
     justify-content: center;
-    font-family: "Roboto Mono", monospace;
-    font-family: "Rubik";
+    font-family: Arial, Helvetica, sans-serif;
     color: var(--text-color);
     background-color: transparent;
 }
@@ -382,6 +394,7 @@ html { scroll-behavior: smooth; }
 
 .carousel-header h1 {
     margin: 0;
+    color: var(--text-color-softer)
 }
 
 .carousel-controls {
@@ -417,6 +430,33 @@ html { scroll-behavior: smooth; }
     display: block;
 }
 
+/* 
+.job-title-and-year {
+    display: flex;
+    align-items: baseline;   
+    gap: 0.5rem;             
+} */
+/* .job-title-and-year h1,
+.job-title-and-year p {
+    display: inline;
+} */
+
+
+.job-description-line {
+    display: flex;
+    align-items: center;
+}
+
+.job-description-icon {
+    filter: invert(1);
+    height: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.job-description-line p {
+    margin: 8px 0px;
+}
+
 /* LAYOUT WITH LEFT SIDEBAR */
 
 body {
@@ -450,7 +490,7 @@ body {
 }
 
 .sidebar-title {
-    margin-bottom: 24px;
+    margin: 24px 0px;
 }
 
 .sidebar-name {
@@ -471,7 +511,7 @@ body {
     flex-direction: column;
 
     gap: 8px;
-    margin-top: 12px;
+    /* margin-top: 12px; */
 }
 
 .nav-link {
@@ -481,12 +521,25 @@ body {
     padding: 6px 10px;
     border-radius: 999px;
     transition: background 0.15s, color 0.15s, transform 0.15s;
+    display: flex;
+    align-items: center;
+}
+
+.nav-link.current {
+    background-color: var(--accent-color-1);
 }
 
 .nav-link:hover {
     background: rgba(255, 255, 255, 0.12);
+    background-color: var(--accent-color-2);
     color: var(--text-color);
     transform: translateX(2px);
+}
+
+.nav-link-icon {
+    filter: invert(1);
+    height: 1rem;
+    margin-right: 0.5rem;
 }
 
 /* main content needs to start to the right of the sidebar */

@@ -1,0 +1,13 @@
+.content {
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: 10; /* so it displays over the sphere */
+    padding: 2rem 20% 0rem 2rem ;
+}
+
+.content h1 {
+    color: var(--text-color-softer);
+}
+
+.content h2 {
+    font-size: 40px;
+}

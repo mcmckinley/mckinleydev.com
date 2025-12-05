@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael McKinley</title>
+    <link rel="icon" href="vagabond.png" type="image/png">
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100..700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="fixed-background">
+    <pre id="ascii-art" class="fixed-ascii-display noselect">error in displaying ascii art/pre>
+</div>
+
+<div class="layout">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-title">
+            <span class="sidebar-name scramble">Michael McKinley</span>
+            <span class="sidebar-subtitle scramble">security</span>
+            <span class="sidebar-subtitle scramble">reverse engineering</span>
+            <span class="sidebar-subtitle scramble">embedded</span>
+            <span class="sidebar-subtitle scramble">C</span>
+        </div>
+
+        <nav class="sidebar-nav">
+            <a href="/" class="nav-link">
+                <img src="/assets/home.svg" class="nav-link-icon" />
+                Home
+            </a>
+            <a href="/volunteering/" class="nav-link">
+                <img src="/assets/work.svg" class="nav-link-icon" />
+                Volunteer Work
+            </a>
+            <a href="/competitions/"     class="nav-link">
+                <img src="/assets/trophy.svg" class="nav-link-icon" />
+                Competitions
+            </a>
+            <a href="/writeups/"     class="nav-link">
+                <img src="/assets/writeups.svg" class="nav-link-icon" />
+                Writeups
+            </a>
+            <a href="/projects/"     class="nav-link current">
+                <img src="/assets/projects.svg" class="nav-link-icon" />
+                Projects
+            </a>
+        </nav>
+        <span class="sidebar-title scramble">Contact</span>
+
+        <nav class="sidebar-nav">
+            <a href="https://www.linkedin.com/in/mxmckinley/" class="nav-link">
+                <img src="/assets/linkedin.svg" class="nav-link-icon" />
+                LinkedIn
+            </a>
+            <a href="https://github.com/mcmckinley" class="nav-link">
+                <img src="/assets/github.svg" class="nav-link-icon" />
+                GitHub
+            </a>
+            <a href="https://github.com/mcmckinley/mckinleydev.com/releases/download/resume/MichaelMcKinleyResume.pdf" class="nav-link">
+                <img src="/assets/resume.svg" class="nav-link-icon" />
+                Download Resume
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="content">
+
+
+    <h1>Projects</h1>
+
+    <div class="project-filters">
+        <button class="filter-button active" data-filter="all">All</button>
+        <button class="filter-button" data-filter="C">C</button>
+    </div>
+
+    <div class="all-projects-container">
+        <div class="project" data-type="nsa-codebreaker">
+            <div class="project-header">
+                <h2 class="project-title">mmmsh: a shell written in C</h2>
+            </div>
+
+            <!-- <div class="project-meta">
+                <span class="project-placement">Rank: in progress</span>
+                <span class="project-team">Solo</span>
+            </div> -->
+
+            <div class="project-tags">
+                <span class="tag" style="color: lightblue">C</span>
+
+            </div>
+
+            <p class="project-description">
+                A UNIX-like shell that supports basic command syntax and pipelines. I made this to learn low-level programming in C.
+            </p>
+            <p class="project-description">
+                Features:
+            </p>
+            <ul>
+                <li>REPL with prompt (mmmsh$) when attached to a TTY</li>
+                <li>Built-ins: cd, pwd, echo</li>
+                <li>External commands via execvp (PATH search)</li>
+                <li>Pipelines: cmd1 | cmd2 | ... | cmdN</li>
+                <li>Graceful EOF handling (Ctrl-D)</li>
+            </ul>
+
+            <div class="project-links">
+                <a href="https://github.com/mcmckinley/mmmsh" class="link-button" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/right-arrow.svg" class="nav-link-icon no-margin"/>
+                    GitHub
+                </a>
+            </div>
+        </div>
+
+        <div class="project" data-type="ncl-individual">
+            <div class="project-header">
+                <h2 class="project-title">Draft Stars -  Full stack web application</h2>
+                <span class="project-date"></span>
+            </div>
+
+            <div class="project-tags">
+                <span class="tag" style="color: cyan">Docker</span>
+                <span class="tag" style="color: #19a1e0">Python</span>
+                <span class="tag" style="color: yellow">JavaScript</span>
+                <span class="tag" style="color: #f53936">PyTorch</span>
+            </div>
+
+            <p class="project-description">
+                Machine learning algorithm and web interface for character recommendation in Brawl Stars. 
+            </p>
+            <p class="project-description">
+                Uses a PyTorch model run on a Python backend with Docker for containerization. 
+            </p>
+            <p class="project-description">
+                I received extremely positive feedback from the community; check it out <a href="https://www.reddit.com/r/BrawlStarsCompetitive/comments/1ezz4rz/ai_draft_engine/">here</a>!
+            </p>
+
+
+            <div class="project-links">
+                <a href="https://github.com/mcmckinley/DraftStars" class="link-button" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/right-arrow.svg" class="nav-link-icon no-margin"/>
+                    Full Stack Hosting
+                </a>
+                <a href="https://github.com/mcmckinley/DraftStarsModel" class="link-button" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/right-arrow.svg" class="nav-link-icon no-margin"/>
+                    Model Definition / Training / Testing
+                </a>
+                <a href="https://github.com/mcmckinley/DraftStarsDataCollection" class="link-button" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/right-arrow.svg" class="nav-link-icon no-margin"/>
+                    Data Collection / Parsing
+                </a>
+                <a href="https://www.reddit.com/r/BrawlStarsCompetitive/comments/1ezz4rz/ai_draft_engine/" class="link-button" target="_blank" rel="noopener noreferrer">
+                    <img src="/assets/right-arrow.svg" class="nav-link-icon no-margin"/>
+                    Community Feedback
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".filter-button");
+            const projects = document.querySelectorAll(".project");
+            console.log(buttons)
+            console.log(projects)
+
+            buttons.forEach((button) => {
+                button.addEventListener("click", () => {
+                    // Update active button
+                    buttons.forEach((btn) => btn.classList.remove("active"));
+                    button.classList.add("active");
+
+                    const filter = button.dataset.filter; // "all", "ctf", "bug-bounty", "hackathon"
+
+                    projects.forEach((comp) => {
+                        const type = comp.dataset.type; // e.g. "ctf"
+
+                        if (filter === "all" || type === filter) {
+                            comp.style.display = "";
+                        } else {
+                            comp.style.display = "none";
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+
+
+
+    </main>
+</div>
+
+
+
+<script src="/cube.js"></script>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/projects/projects.css">
+<script src="/index.js"></script>
+
+</body>
+</html>

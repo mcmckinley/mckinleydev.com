@@ -1,3 +1,5 @@
+// this js is a total mess. it's like a dirty room. only i know where everything goes.
+
 var doLuminance = false;
 
 var pretag = document.getElementById("ascii-art");
@@ -44,15 +46,15 @@ A = 0
 B = 0 
 C = 0
 
-rotationSpeedA = 0.0006
-rotationSpeedB = 0.0006
+rotationSpeedA = 0.000
+rotationSpeedB = 0.000
 rotationSpeedC = 0
 
 const scrollMovementFactorOnSphere = 6.0 
 
 var renderDistance = 23
 
-var density = 0.2;
+var density = 0.05;
 
 
 var vSpaces = Math.floor(window.innerHeight / 8); 
@@ -65,6 +67,8 @@ const start = (typeof performance !== "undefined" ? performance.now() : Date.now
 function timeSinceStart() {
   return typeof performance !== "undefined" ? performance.now() : Date.now();
 }
+
+
 
 var asciiframe = function () {
   A += rotationSpeedA
@@ -85,10 +89,14 @@ var asciiframe = function () {
   var currentScroll = getScrollTop();
 
   var scrollDiff = currentScroll - previousScroll
-  C = scrollDiff / 50000 ;
+  C = scrollDiff / 5000 ;
+
+  previousScroll = currentScroll;
 
   for (planet of planets) {
     planet.y = (currentScroll / 1000) * scrollMovementFactorOnSphere;
+
+    A += C;
   }
 
 

@@ -17,25 +17,25 @@
   }
 
   // weird AI code that does nothing
-  // function lockBox(el, textForMeasure) {
-  //   // Measure with the final text, then lock width/height to avoid layout shift.
-  //   const prev = el.textContent;
-  //   el.textContent = textForMeasure;
+  function lockBox(el, textForMeasure) {
+    // Measure with the final text, then lock width/height to avoid layout shift.
+    const prev = el.textContent;
+    el.textContent = textForMeasure;
 
-  //   const prevDisplay = el.style.display;
-  //   if (getComputedStyle(el).display === "inline") el.style.display = "inline-block";
+    const prevDisplay = el.style.display;
+    if (getComputedStyle(el).display === "inline") el.style.display = "inline-block";
 
-  //   const rect = el.getBoundingClientRect();
-  //   el.style.width = rect.width + "px";
-  //   el.style.height = rect.height + "px";
+    const rect = el.getBoundingClientRect();
+    el.style.width = rect.width + "px";
+    el.style.height = rect.height + "px";
 
-  //   el.textContent = prev;
-  //   return () => {
-  //     el.style.width = "";
-  //     el.style.height = "";
-  //     if (prevDisplay) el.style.display = prevDisplay;
-  //   };
-  // }
+    el.textContent = prev;
+    return () => {
+      el.style.width = "";
+      el.style.height = "";
+      if (prevDisplay) el.style.display = prevDisplay;
+    };
+  }
 
   function runScramble(el, options = {}) {
     const target = (el.getAttribute("data-text") || el.textContent || "").toString();
@@ -49,7 +49,7 @@
       getComputedStyle(document.documentElement).getPropertyValue("--text-color") || "#fff";
 
     // Lock size until the effect finishes
-    // const unlock = lockBox(el, target);
+    const unlock = lockBox(el, target);
 
     // Reset & apply the fadeUp animation cleanly
     el.style.animation = "none";
@@ -96,7 +96,7 @@
         el.dataset.ready = "0"; // won’t re-run until it leaves the viewport
 
         // Release size lock now that we’ve settled
-        // unlock();
+        unlock();
       }
     }
 

@@ -1,13 +1,9 @@
-big name top left
-descriptoin below
+background art
+- cube that rotates with scroll
+- and light from mouse
 
-
-
-links on right side? cube on right side?
-
-cube that rotates with scroll
-and light from mouse
+a few issues arise on mobile.
+- don't scramble char if it's a newline
+- text is too small
 
 100 lines of css - is this possible?
-
-don't scramble char if it's a newline

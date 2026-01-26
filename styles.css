@@ -56,6 +56,7 @@ html, body {
     max-height: 100%;
     margin: 0;
     position: absolute;
+    z-index: -10;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -75,15 +76,11 @@ html, body {
 }
 
 .sec {
-    z-index: 10;
-    width: 60%;
-
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     font-family: "Roboto Mono", monospace;
     color: var(--text-color);
-    padding-left: 3%;
+    padding: 0 3% 0 3%;
 }
 
 
@@ -100,26 +97,23 @@ html, body {
     .social-image {
         height: 60px;   
     }
-    /* .sec {
+    .sec {
         max-width: 60%;
-    } */
+    }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 28px;
+        font-size: 40px;
     }
     h3 {
-        font-size: 14px;
+        font-size: 20px;
     }
     p {
-        font-size: 10px;
+        font-size: 14px;
     }
     .social-image {
         height: 40px;   
-    }
-    .sec {
-        width: 80vw
     }
 }
 
@@ -173,18 +167,15 @@ for some reason, there's a little square that pops up when an
   from{opacity:0;transform:translateY(12px);color:#000;}
   to{opacity:1;transform:translateY(0);color:var(--text-color);}
 }
-.scramble{display:inline-block;will-change:transform,opacity,color;}
+.scramble {
+    display:inline-block;
+    will-change: transform,opacity,color;
+}
 
 /* Prevent flash/jerk before JS runs: only hide when JS has enabled the class */
 .js-enabled .scramble {
   opacity: 0;
   transform: translateY(12px);
-}
-
-
-/* === primary action buttons === */
-.primary-actions{
-  margin-top:22px;
 }
 
 /* respect reduced motion */
@@ -193,28 +184,19 @@ for some reason, there's a little square that pops up when an
   .btn.cta:hover, .btn.cta:active{ transform:none; }
 }
 
-/* optional: smooth scroll for same-page anchors */
-html { scroll-behavior: smooth; }
-
 .inline-img {
     max-height: 1rem;
 }
 .inline-img-h3 {
     max-height: 1.5rem;
+    margin-right: 0.5rem;
 }
 
 
 .subsection-highlight {
-    background-color: color-mix(in srgb, var(--bg-color-darker), transparent 70%);
+    background-color: color-mix(in srgb, var(--bg-color-darker), transparent 50%);
+    z-index: 10;
     padding: 0 5px 15px 15px;
     margin-bottom: 10px;
     border-radius: 2rem;
 }
-
-.subsection-highlight h3, .subsection-highlight a {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0px;
-}
-

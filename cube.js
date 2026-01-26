@@ -1,6 +1,6 @@
 // this js is a total mess. it's like a dirty room. only i know where everything goes.
 
-var doLuminance = false;
+var doLuminance = true;
 
 var pretag = document.getElementById("ascii-art");
 
@@ -14,7 +14,7 @@ var framerate = 50
 
 var planets = [
   {
-    x: -20, // SUN
+    x: -10,
     y: 3,
     z: -20,
     r: 25,
@@ -23,16 +23,16 @@ var planets = [
     vy: 0,
     vz: 0
   },
-  {
-    x: 20, // SUN
-    y: 3,
-    z: -10,
-    r: 10,
-    m: 10,
-    vx: 0,
-    vy: 0,
-    vz: 0
-  }
+  // {
+  //   x: 20,
+  //   y: 3,
+  //   z: -10,
+  //   r: 10,
+  //   m: 10,  
+  //   vx: 0,
+  //   vy: 0,
+  //   vz: 0
+  // }
 ]
 
 var count = 0
@@ -76,10 +76,10 @@ var asciiframe = function () {
   C += rotationSpeedC
 
 
-  // var lightSources = [
-  //   // [0, 0, 0], // origin
-  //   [0 , - scrollTop / 42 + 10, 20] // tracks how much the user has scrolled
-  // ]
+  var lightSources = [
+    [10, 0, 0],
+    // [0 , - scrollTop / 42 + 10, 20] // tracks how much the user has scrolled
+  ]
 
 
   function getScrollTop() {
@@ -259,37 +259,25 @@ var asciiframe = function () {
 
     const intersect = screenx + hSpaces * screeny;
 
-    // Luminance when there are multiple light sources
-    // var luminance = 0
-    // for (var i = 0; i < lightSources.length; i++){
-    //   const lightSource = lightSources[i]
-    //   const lightvec = normalize([
-    //     lightSource[0] - point[0],
-    //     lightSource[1] - point[1],
-    //     lightSource[2] - point[2],
-    //   ]);
-    //   const strength = 2.7 ** (-0.02 * lightvec[3]);
-    //   luminance += 0 | (strength * 11 * dot(lightvec, normal));
-    // }
-    // if (luminance > 11)
-    //   luminance = 11
-
-
-    
-
     var depth = 1 / (50 - point[2]);
 
     if (depth > zBuffer[intersect]) {
       zBuffer[intersect] = depth;
       if (doLuminance) {
         // Luminance for a single light source
-        const lightvec = normalize([
-          0 - point[0],
-          0 - point[1],
-          0 - point[2],
-        ]);
-        const strength = 2.7 ** (-0.02 * lightvec[3]);
-        const luminance = 0 | (strength * 11 * dot(lightvec, normal));
+        var luminance = 0
+        for (var i = 0; i < lightSources.length; i++){
+          const lightSource = lightSources[i]
+          const lightvec = normalize([
+            lightSource[0] - point[0],
+            lightSource[1] - point[1],
+            lightSource[2] - point[2],
+          ]);
+          const strength = 2.7 ** (-0.02 * lightvec[3]);
+          luminance += 0 | (strength * 11 * dot(lightvec, normal));
+        }
+        if (luminance > 11)
+          luminance = 11
         b[intersect] = "`,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
       } else {
         var shouldDisplay = true;

@@ -161,8 +161,12 @@ for some reason, there's a little square that pops up when an
   display:flex;
   gap:18px;
   /* justify-content:center; */
-  margin-top:20px;
+  margin: 12px;
 }
+.sec.hero p{
+    margin: 5px 0;
+}
+
 @keyframes fadeUp{
   from{opacity:0;transform:translateY(12px);color:#000;}
   to{opacity:1;transform:translateY(0);color:var(--text-color);}

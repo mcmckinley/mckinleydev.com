@@ -12,11 +12,13 @@ var pretag = document.getElementById("ascii-art");
 var doLuminance = true;
 var count = 0
 
+r = [0.02, 0.02, 0.02]
 
 var planets = [
   {
-    x: 0,
-    y: 3,
+    x: 20,
+    y_initial: -10,
+    y: -10,
     z: -20,
     r: 25,
     m: 10,
@@ -36,8 +38,8 @@ var vSpaces = Math.floor(window.innerHeight / 8);
 A = 0
 B = 0 
 C = 0
-rotationSpeedA = 0.0005
-rotationSpeedB = 0.0002
+rotationSpeedA = -0.0005
+rotationSpeedB = -0.0002
 rotationSpeedC = 0
 const scrollMovementFactorOnSphere = 6.0 
 var framerate = 20
@@ -93,6 +95,11 @@ var asciiframe = function () {
   B += rotationSpeedB
   C += rotationSpeedC
 
+  // for cube
+  // r[0] += 0.005
+  // r[1] += 0.005
+  // r[2] += 0.005
+
   function getScrollTop() {
     return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
   }
@@ -103,7 +110,7 @@ var asciiframe = function () {
   C = scrollDiff / 5000 ;
   previousScroll = currentScroll;
   for (planet of planets) {
-    planet.y = (currentScroll / 1000) * scrollMovementFactorOnSphere;
+    planet.y = planet.y_initial + (currentScroll / 1000) * scrollMovementFactorOnSphere;
   }
 
   var b = [];
@@ -165,6 +172,80 @@ var asciiframe = function () {
     renderSphere(planets[i])
   }
 
+  // cube
+  // function rotate(v, r) {
+  //   const sinA = Math.sin(r[0]),
+  //     cosA = Math.cos(r[0]),
+  //     sinB = Math.sin(r[1]),
+  //     cosB = Math.cos(r[1]),
+  //     sinC = Math.sin(r[2]),
+  //     cosC = Math.cos(r[2]);
+
+  //   const xprime =
+  //     v[0] * (cosB * cosC) +
+  //     v[1] * (sinA * sinB * cosC - cosA * sinC) +
+  //     v[2] * (cosA * sinB * cosC + sinA * sinC);
+  //   const yprime =
+  //     v[0] * (cosB * sinC) +
+  //     v[1] * (sinA * sinB * sinC + cosA * cosC) +
+  //     v[2] * (cosA * sinB * sinC - sinA * cosC);
+  //   const zprime = 
+  //     v[0] * -sinB + 
+  //     v[1] * (sinA * cosB) + 
+  //     v[2] * (cosA * cosB);
+
+  //   return [xprime, yprime, zprime];
+  // }
+
+  // function renderCube(r) {
+  //     // Normal vectors for each face of the cube
+  //     var normals = [
+  //       [0, 1, 0],
+  //       [0, -1, 0],
+  //       [1, 0, 0],
+  //       [-1, 0, 0],
+  //       [0, 0, 1],
+  //       [0, 0, -1],
+  //     ];
+
+  //     // Rotate each normal vector
+  //     for (var i = 0; i < 6; i++) {
+  //       normals[i] = rotate(normals[i], r);
+  //     }
+
+  //     // For every point on one face of the cube, render that
+  //     // point on each face.
+  //     for (var i = -side; i < side; i += 0.2) {
+  //       for (var j = -side; j < side; j += 0.2) {
+  //         var points = [
+  //           [i, side, j],
+  //           [i, -side, j],
+  //           [side, i, j],
+  //           [-side, i, j],
+  //           [i, j, side],
+  //           [i, j, -side],
+  //         ];
+
+  //         for (const direction in points) {
+  //           renderPoint(
+  //             rotate(points[direction], r), // The rotated point
+  //             normals[direction], // Its normal vector
+  //           );
+  //         }
+  //       }
+  //     }
+  //   }
+  //   // Adjust the side length of the cube with the screen
+  //   var side = 0;
+  //   if (window.innerWidth > 1000) {
+  //     side = 4;
+  //   } else {
+  //     side = window.innerWidth / 250;
+  //   }
+
+  //   renderCube(r);
+
+
   function renderPoint(point, normal) {
     // notes: the camera is assumed to be 0,0,0
 
@@ -208,7 +289,7 @@ var asciiframe = function () {
         }
         if (luminance > 11)
           luminance = 11
-        b[intersect] = "`,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
+        b[intersect] = " `,-~:;!=*$#@"[luminance > 0 ? luminance : 0];
       } 
       // no luminance
       else {
@@ -277,80 +358,7 @@ asciiframe();
 
 
 
-// function renderCube(r) {
-  //   // Normal vectors for each face of the cube
-  //   var normals = [
-  //     [0, 1, 0],
-  //     [0, -1, 0],
-  //     [1, 0, 0],
-  //     [-1, 0, 0],
-  //     [0, 0, 1],
-  //     [0, 0, -1],
-  //   ];
 
-  //   // Rotate each normal vector
-  //   for (var i = 0; i < 6; i++) {
-  //     normals[i] = rotate(normals[i], r);
-  //   }
-
-  //   // For every point on one face of the cube, render that
-  //   // point on each face.
-  //   for (var i = -side; i < side; i += 0.2) {
-  //     for (var j = -side; j < side; j += 0.2) {
-  //       var points = [
-  //         [i, side, j],
-  //         [i, -side, j],
-  //         [side, i, j],
-  //         [-side, i, j],
-  //         [i, j, side],
-  //         [i, j, -side],
-  //       ];
-
-  //       for (const direction in points) {
-  //         renderPoint(
-  //           rotate(points[direction], r), // The rotated point
-  //           normals[direction], // Its normal vector
-  //         );
-  //       }
-  //     }
-  //   }
-  // }
-   // Adjust the side length of the cube with the screen
-  // var side = 0;
-  // if (window.innerWidth > 1000) {
-  //   side = 4;
-  // } else {
-  //   side = window.innerWidth / 250;
-  // }
-
-  // renderCube(r);
-
-
-
-
-// function rotate(v, r) {
-//   const sinA = Math.sin(r[0]),
-//     cosA = Math.cos(r[0]),
-//     sinB = Math.sin(r[1]),
-//     cosB = Math.cos(r[1]),
-//     sinC = Math.sin(r[2]),
-//     cosC = Math.cos(r[2]);
-
-//   const xprime =
-//     v[0] * (cosB * cosC) +
-//     v[1] * (sinA * sinB * cosC - cosA * sinC) +
-//     v[2] * (cosA * sinB * cosC + sinA * sinC);
-//   const yprime =
-//     v[0] * (cosB * sinC) +
-//     v[1] * (sinA * sinB * sinC + cosA * cosC) +
-//     v[2] * (cosA * sinB * sinC - sinA * cosC);
-//   const zprime = 
-//     v[0] * -sinB + 
-//     v[1] * (sinA * cosB) + 
-//     v[2] * (cosA * cosB);
-
-//   return [xprime, yprime, zprime];
-// }
 
 
 // function updatePlanetPositions(){
